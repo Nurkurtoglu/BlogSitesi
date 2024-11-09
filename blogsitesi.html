@@ -24,7 +24,7 @@
       }
       .carousel-item img {
         width: 100%; 
-        height: 500px; 
+        height: 770px; 
         object-fit: cover; 
       }
     </style>
@@ -59,14 +59,18 @@
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="file:///Users/bilgesubaris/Downloads/a3bd3813ffa40f6307a285a7a778fbb8.jpg" class="d-block w-100" alt="...">
+          <img src="file:///Users/bilgesubaris/Downloads/WhatsApp%20Image%202024-11-09%20at%2012.38.51%20(1).jpeg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="file:///Users/bilgesubaris/Downloads/c49fa9133627dae532f55b1d08b85be4.jpg" class="d-block w-100" alt="...">
+          <img src="file:///Users/bilgesubaris/Downloads/WhatsApp%20Image%202024-11-09%20at%2012.38.51.jpeg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
           <img src="file:///Users/bilgesubaris/Desktop/PROJE/Ekran%20Resmi%202024-11-08%2016.18.58.png" class="d-block w-100" alt="...">
         </div>
+        <div class="carousel-item">
+          <img src="file:///Users/bilgesubaris/Desktop/WhatsApp%20Image%202024-11-08%20at%2016.23.46.jpeg" class="d-block w-100" alt="...">
+        </div>
+        
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -80,20 +84,41 @@
 
     <!-- Film butonları Hata Düzeltilecek -->
 
-     <h1 class ="text-white">Bu Haftanın Enleri  ></h1>
+         <style>
+        .btn-img-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-img-container img {
+            width: 100px;  /* Resmin genişliği */
+            margin-bottom: 8px;  /* Resim ve yazı arasına boşluk */
+        }
+    </style>
+</head>
+<body>
 
-     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-      <button class="btn me-md-2" type="button">Dark</button>
-      <img src="file:///Users/bilgesubaris/Downloads/0101371.jpg" alt="Icon" style="width: 250px; height: 300px; margin-right: 60px;"
-      <button class="btn me-md-2" type="button">Dark</button>
-      <img src="file:///Users/bilgesubaris/Downloads/0101371.jpg" alt="Icon" style="width: 250px; height: 300px; margin-right: 60px;"
+    <!-- Başlık -->
+    <h1 class="text-white">Bu Haftanın Enleri ></h1>
 
+    <!-- Buton ve Resim -->
+    <button class="btn  text-white w-auto">
+        <!-- Flexbox ile düzenleme -->
+        <div class="btn-img-container">
+            <img src="file:///Users/bilgesubaris/Downloads/0101371.jpg" alt="Resim">
+            <span>Dark</span>
+        </div>
+    </button>
+  
+  
     </div>
-
+    
+    
     <!-- Scrollbar tanımlama -->
     <div style="height: 2000px;"></div>
     <!-- Buton -->
-    
+    <h1 class="text-white">Dark</h1>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>
