@@ -20,21 +20,55 @@
       }
       .button-container {
         text-align: center;
-        margin-top: 10px;
+        margin-top: 20px;
       }
       .carousel-item img {
         width: 100%; 
         height: 770px; 
         object-fit: cover; 
       }
+      /* Resimli buton düzeni */
+      .btn-img-container {
+          display: flex;
+          flex-direction: row; /* Butonları yan yana yap */
+          justify-content: space-evenly; /* Butonlar arasına eşit boşluk bırak */
+          gap: 5px; /* Butonlar arasındaki boşluk */
+          padding: 10px;
+      }
+      .btn-img-container img {
+          width: 150px; /* Resmin boyutu */
+          height: 230px; /* Resmin yüksekliği */
+          object-fit: cover; /* Resmin boyutunu koruyarak sığdır */
+          border-radius: 10px;
+      }
+      .btn-img-container span {
+          font-size: 18px; /* Yazı boyutu */
+          color: white; /* Yazı rengi */
+          margin-top: 10px; /* Resim ve yazı arasında mesafe */
+      }
+      .btn-img-container button {
+          background-color: transparent;
+          border: 2px solid rgb(0, 0, 0); /* Butonun kenar rengi */
+          padding: 10px 30px; /* Butonun iç boşluğu */
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          height: 265px; /* Buton yüksekliği */
+          width: 200px; /* Buton genişliği */
+      }
+      .btn-img-container button:hover {
+          background-color: rgb(244, 226, 67); /* Hover durumunda buton rengi */
+          color: black;
+      }
     </style>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-dark text-white fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">TVISION</a>
-        <button class="navbar-toggler btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <a class="navbar-brand" href="#">TVISION<span style="color: rgb(244, 226, 67); font-weight: bold; font-size: 1.2em;">+</span></a>
+        <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
@@ -51,6 +85,10 @@
               <a class="nav-link" href="#">Üye Ol/Giriş Yap</a> 
             </li>
           </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2, bg-dark , text-white" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn" type="submit" style="background-color: yellow; color: black; border: none ;">Search</button>
+          </form>
         </div>
       </div>
     </nav>
@@ -59,18 +97,20 @@
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="file:///Users/bilgesubaris/Downloads/WhatsApp%20Image%202024-11-09%20at%2012.38.51%20(1).jpeg" class="d-block w-100" alt="...">
+          <img src="file:///Users/bilgesubaris/Desktop/PROJE/WhatsApp%20Image%202024-11-09%20at%2012.38.51%20(1).jpeg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="file:///Users/bilgesubaris/Downloads/WhatsApp%20Image%202024-11-09%20at%2012.38.51.jpeg" class="d-block w-100" alt="...">
+          <img src="file:///Users/bilgesubaris/Desktop/PROJE/PHOTO-2024-11-09-13-16-33.jpg" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
           <img src="file:///Users/bilgesubaris/Desktop/PROJE/Ekran%20Resmi%202024-11-08%2016.18.58.png" class="d-block w-100" alt="...">
         </div>
         <div class="carousel-item">
-          <img src="file:///Users/bilgesubaris/Desktop/WhatsApp%20Image%202024-11-08%20at%2016.23.46.jpeg" class="d-block w-100" alt="...">
+          <img src="file:///Users/bilgesubaris/Desktop/PROJE/WhatsApp%20Image%202024-11-09%20at%2012.38.51.jpeg" class="d-block w-100" alt="...">
         </div>
-        
+        <div class="carousel-item">
+          <img src="file:///Users/bilgesubaris/Desktop/PROJE/WhatsApp%20Image%202024-11-08%20at%2016.23.46.jpeg" class="d-block w-100" alt="...">
+        </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -82,43 +122,62 @@
       </button>
     </div>
 
-    <!-- Film butonları Hata Düzeltilecek -->
+   
+    <h1 class="text-white ">Bu Haftanın Enleri ></h1>
 
-         <style>
-        .btn-img-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .btn-img-container img {
-            width: 100px;  /* Resmin genişliği */
-            margin-bottom: 8px;  /* Resim ve yazı arasına boşluk */
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Başlık -->
-    <h1 class="text-white">Bu Haftanın Enleri ></h1>
-
-    <!-- Buton ve Resim -->
-    <button class="btn  text-white w-auto">
-        <!-- Flexbox ile düzenleme -->
-        <div class="btn-img-container">
-            <img src="file:///Users/bilgesubaris/Downloads/0101371.jpg" alt="Resim">
+    <!-- Bu Haftanın Enleri  -->
+    <div class="btn-img-container">
+        <button class="btn">
+            <img src="file:///Users/bilgesubaris/Desktop/PROJE/0101371.jpg"">
             <span>Dark</span>
-        </div>
+        </button>
+        <button class="btn">
+            <img src="file:///Users/bilgesubaris/Desktop/PROJE/WhatsApp%20Image%202024-11-08%20at%2016.23.46.jpeg" >
+            <span>Dune</span>
+        </button>
+        <button class="btn">
+          <img src="file:///Users/bilgesubaris/Desktop/PROJE/tXF2p2hthwXDXvCyXcwWuJKgaHD.jpg" >
+          <span>Joker:İki Delilik</span>
+      </button>
+      <button class="btn">
+        <img src="file:///Users/bilgesubaris/Desktop/PROJE/dXyIK3s8ZN7FH3AoaeyaBqX0eoJ.jpg" >
+        <span>Esaretin Bedeli</span>
     </button>
-  
-  
+    <button class="btn">
+      <img src="https://image.tmdb.org/t/p/w1280/rNrBHeqnDA8aHIz9eYkBskcKhq7.jpg" >
+      <span>Cevher</span>
+  </button>
     </div>
-    
-    
-    <!-- Scrollbar tanımlama -->
+
+    <h1 class="text-white ">Aksiyon Filmleri ></h1>
+
+    <!-- Aksiyon Filmleri  -->
+    <div class="btn-img-container">
+        <button class="btn">
+            <img src="https://www.themoviedb.org/t/p/w1280/xIjGt7bSU7hgWtYwccfufiM1wWZ.jpg">
+            <span>Venom:Son Dans</span>
+        </button>
+        <button class="btn">
+            <img src="https://www.themoviedb.org/t/p/w1280/c3BuUXYjvGcKwZYKZsYjMDFQr1D.jpg" >
+            <span>Deadpool & Wolverine </span>
+        </button>
+        <button class="btn">
+          <img src="https://www.themoviedb.org/t/p/w1280/spWV1eRzlDxvai8LbxwAWR0Vst4.jpg" >
+          <span>Arcadian</span>
+      </button>
+      <button class="btn">
+        <img src="https://www.themoviedb.org/t/p/w1280/7fR3KxswtY8OHHZuOUB9td58CRX.jpg" >
+        <span>Survive</span>
+    </button>
+    <button class="btn">
+      <img src="https://www.themoviedb.org/t/p/w1280/s5YviCAQnvybud7mBjAz4SQJ95S.jpg" >
+      <span>Gladyatör II</span>
+  </button>
+    </div>
+
     <div style="height: 2000px;"></div>
-    <!-- Buton -->
-    <h1 class="text-white">Dark</h1>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
   </body>
 </html>
