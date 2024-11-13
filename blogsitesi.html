@@ -68,7 +68,8 @@
     <nav class="navbar navbar-expand-lg bg-dark text-white fixed-top">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">TVISION<span style="color: rgb(244, 226, 67); font-weight: bold; font-size: 1.2em;">+</span></a>
-        <span class="navbar-toggler-icon"></span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
@@ -81,17 +82,17 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Bu Haftanın Enleri</a> 
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Üye Ol/Giriş Yap</a> 
-            </li>
           </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2, bg-dark , text-white" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn" type="submit" style="background-color: yellow; color: black; border: none ;">Search</button>
-          </form>
         </div>
+        <form class="d-flex" role="search" style="position: absolute; top: 10px; right: 350px;">
+          <input class="form-control me-2 bg-dark text-white" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn" type="submit" style="background-color: rgb(188, 126, 222); color: black; border: none;">Search</button>
+        </form>
+          <a class="nav-link" href="#"style="color: rgb(244, 226, 67)">Üye Ol/Giriş Yap</a> 
+        </li>
       </div>
     </nav>
+    
 
     <!-- Carousel -->
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
@@ -123,7 +124,7 @@
     </div>
 
    
-    <h1 class="text-white ">Bu Haftanın Enleri ></h1>
+    <h1 class="text-white">Bu Haftanın Enleri</h1>
 
     <!-- Bu Haftanın Enleri  -->
     <div class="btn-img-container">
@@ -149,7 +150,7 @@
   </button>
     </div>
 
-    <h1 class="text-white ">Aksiyon Filmleri ></h1>
+    <h1 class="text-white ">Aksiyon Filmleri</h1>
 
     <!-- Aksiyon Filmleri  -->
     <div class="btn-img-container">
