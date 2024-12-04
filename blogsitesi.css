@@ -1,0 +1,111 @@
+.navbar-nav .nav-link {
+    color: rgb(244, 226, 67) !important;
+}
+.navbar-brand {
+    color: white !important;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    padding-top: 56px;
+    background-color: black;
+}
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+.carousel-item img {
+    width: 100%; 
+    height: 770px; 
+    object-fit: cover; 
+}
+.btn-img-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 5px;
+    padding: 10px;
+}
+.btn-img-container img {
+    width: 150px;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.btn-img-container span {
+    font-size: 18px;
+    color: white;
+    margin-top: 10px;
+}
+.btn-img-container button {
+    background-color: transparent;
+    border: 2px solid rgb(0, 0, 0);
+    padding: 10px 30px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 265px;
+    width: 200px;
+}
+.btn-img-container button:hover {
+    background-color: rgb(244, 226, 67);
+    color: black;
+}
+#movieDetails {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgb(0, 0, 0);
+}
+#movieDetailsPage {
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+#movieDetailsContent {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px; /* Resim ve özet  arasındaki boşluk */
+}
+#moviePoster {
+    width: 150px;
+    height: auto;
+    border-radius: 8px;
+}/* Dropdown butonlarının arka planını koyu, yazılarını sarı yap */
+.navbar .dropdown-toggle {
+background-color: #333 !important; /* Koyu arka plan */
+color: rgb(244, 226, 67) !important; /* Sarı yazı rengi */
+border: none; /* Border'ı kaldır */
+margin-right: 0px; /* Butonlar arasında sağ boşluk */
+}
+
+.navbar .dropdown-menu {
+background-color: #fffefe; /* Dropdown menüsünün arka planını koyu yap */
+border: none; /* Menü border'ını kaldır */
+}
+
+.navbar .dropdown-item {
+color: rgb(0, 0, 0) !important; /* Dropdown item'ların yazı rengini sarı yap */
+}
+
+.navbar .dropdown-item:hover {
+background-color: rgb(244, 226, 67) !important; /* Hover durumunda arka plan sarı */
+color: black !important; /* Hover'da yazıyı siyah yap */
+}
+
+/* Navbar'daki butonlar arasında boşluk eklemek için */
+.navbar .navbar-nav .nav-link {
+margin-right: 15px; /* Butonlar arasında boşluk */
+}
+
+.navbar .btn-group {
+margin-right: 15px; /* Dropdown butonları arasına boşluk eklemek için */
+}
+

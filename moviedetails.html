@@ -1,0 +1,22 @@
+
+    <!-- Sayfa içeriği buraya gelir -->
+    
+    <!-- Scriptler -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        document.getElementById("searchButton").addEventListener("click", function(event) {
+            event.preventDefault(); // Sayfa yeniden yüklenmesini engelle
+            const movieName = document.getElementById("searchInput").value;
+
+            // Film ismiyle yeni sayfaya yönlendir
+            if (movieName) {
+                window.location.href = `movie-details.html?movieName=${encodeURIComponent(movieName)}`;
+            } else {
+                alert("Lütfen bir film adı girin!");
+            }
+        });
+    </script>
+</body>
+</html>
+
