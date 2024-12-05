@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="tr" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Film Detayları</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="movie-details.css">
+    <style>
+        /* Diğer stiller... */
+        .search-results h3 {
+            color: black; /* Arama Sonuçları başlığının rengini siyah yap */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar buraya gelecek -->
+    <nav class="navbar navbar-expand-lg bg-dark text-white fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand ms-4" href="blogsitesi.html" style="font-weight: 500; font-size: 1.2em;">
+                TVISION<span style="color: rgb(244, 226, 67); font-weight: bold;">+</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Filmler</button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Yeni Çıkan</a></li>
+                        <li><a class="dropdown-item" href="#">En Çok Oy Alan</a></li>
+                    </ul>
+                </div>
+
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Diziler</button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Yeni Çıkan</a></li>
+                        <li><a class="dropdown-item" href="#">En Çok Oy Alan</a></li>
+                    </ul>
+                </div>
+
+                <!-- Arama Formu -->
+                <form action="movie-details.html" method="GET" class="d-flex">
+                    <input class="form-control me-2 bg-dark text-white" 
+                           type="search" 
+                           name="query"
+                           id="searchInput"
+                           placeholder="Ara..." 
+                           aria-label="Search">
+                    <button class="btn btn-sm btn-search" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="search-results">
+        <h3>Arama Sonuçları</h3>
+        <div id="searchResults"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const API_KEY = 'c9d5f0f01b098c021e6964b9fae786dd';
+        const BASE_URL = 'https://api.themoviedb.org/3';
+        const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('query');
+            const searchType = urlParams.get('searchType') || 'movie';
+
+            if (query) {
+                performSearch(query, searchType);
+            }
+        });
+
+        async function performSearch(query, type) {
+            try {
+                const url = `${BASE_URL}/search/${type}?api_key=${API_KEY}&query=${encodeURIComponent(query)}&language=tr-TR`;
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                displayResults(data.results, type);
+            } catch (error) {
+                console.error('Arama hatası:', error);
+                document.getElementById('searchResults').innerHTML = 
+                    '<p class="text-danger">Arama sırasında bir hata oluştu.</p>';
+            }
+        }
+
+        function displayResults(results, type) {
+            const resultsDiv = document.getElementById('searchResults');
+            
+            if (!results || results.length === 0) {
+                resultsDiv.innerHTML = '<p class="text-center">Sonuç bulunamadı.</p>';
+                return;
+            }
+
+            const html = results.map(item => {
+                switch(type) {
+                    case 'movie':
+                        return `
+                            <div class="movie-card">
+                                <img src="${item.poster_path ? IMAGE_BASE_URL + item.poster_path : 'placeholder.jpg'}" 
+                                     alt="${item.title}" 
+                                     class="movie-poster"
+                                     onerror="this.src='placeholder.jpg'">
+                                <div class="movie-info">
+                                    <h2 class="movie-title">${item.title}</h2>
+                                    <div class="release-date">
+                                        <i class="far fa-calendar-alt"></i> 
+                                        ${item.release_date ? new Date(item.release_date).toLocaleDateString('tr-TR') : 'Tarih belirtilmemiş'}
+                                    </div>
+                                    <div class="rating">
+                                        <i class="fas fa-star text-warning"></i> 
+                                        ${item.vote_average ? item.vote_average.toFixed(1) : 'N/A'} / 10
+                                    </div>
+                                    <div class="overview">${item.overview || 'Özet bulunmuyor.'}</div>
+                                </div>
+                            </div>
+                        `;
+                    case 'tv':
+                        return `
+                            <div class="movie-card">
+                                <img src="${item.poster_path ? IMAGE_BASE_URL + item.poster_path : 'placeholder.jpg'}" 
+                                     alt="${item.name}" 
+                                     class="movie-poster"
+                                     onerror="this.src='placeholder.jpg'">
+                                <div class="movie-info">
+                                    <h2 class="movie-title">${item.name}</h2>
+                                    <div class="release-date">
+                                        <i class="far fa-calendar-alt"></i> 
+                                        ${item.first_air_date ? new Date(item.first_air_date).toLocaleDateString('tr-TR') : 'Tarih belirtilmemiş'}
+                                    </div>
+                                    <div class="rating">
+                                        <i class="fas fa-star text-warning"></i> 
+                                        ${item.vote_average ? item.vote_average.toFixed(1) : 'N/A'} / 10
+                                    </div>
+                                    <div class="overview">${item.overview || 'Özet bulunmuyor.'}</div>
+                                </div>
+                            </div>
+                        `;
+                    case 'person':
+                        return `
+                            <div class="movie-card">
+                                <img src="${item.profile_path ? IMAGE_BASE_URL + item.profile_path : 'placeholder.jpg'}" 
+                                     alt="${item.name}" 
+                                     class="movie-poster"
+                                     onerror="this.src='placeholder.jpg'">
+                                <div class="movie-info">
+                                    <h2 class="movie-title">${item.name}</h2>
+                                    <div class="known-for">Bilinen işleri: ${item.known_for_department || 'Belirtilmemiş'}</div>
+                                    <div class="popularity">
+                                        <i class="fas fa-users"></i> Popülerlik: ${item.popularity?.toFixed(1) || 'N/A'}
+                                    </div>
+                                    <div class="known-for-movies">
+                                        <h3>Bilinen Projeleri:</h3>
+                                        ${item.known_for?.map(work => `<div>${work.title || work.name}</div>`).join('') || 'Bilgi bulunmuyor.'}
+                                    </div>
+                    </div>
+                        `;
+                }
+            }).join('');
+
+            resultsDiv.innerHTML = html;
+        }
+    </script>
+</body>
+</html>
