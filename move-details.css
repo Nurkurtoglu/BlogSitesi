@@ -11,8 +11,8 @@ body {
     min-height: 60px;
 }
 
-.navbar-brand {
-    color: #fff !important;
+.navbar .navbar-brand {
+    color: white !important;
 }
 
 .navbar .dropdown-toggle {

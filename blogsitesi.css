@@ -72,41 +72,40 @@ body {
 #movieDetailsContent {
     display: flex;
     align-items: flex-start;
-    gap: 20px; /* Resim ve özet  arasındaki boşluk */
+    gap: 20px; /* Resim ve Ã¶zet  arasÄ±ndaki boÅŸluk */
 }
 #moviePoster {
     width: 150px;
     height: auto;
     border-radius: 8px;
-}/* Dropdown butonlarının arka planını koyu, yazılarını sarı yap */
+}/* Dropdown butonlarÄ±nÄ±n arka planÄ±nÄ± koyu, yazÄ±larÄ±nÄ± sarÄ± yap */
 .navbar .dropdown-toggle {
 background-color: #333 !important; /* Koyu arka plan */
-color: rgb(244, 226, 67) !important; /* Sarı yazı rengi */
-border: none; /* Border'ı kaldır */
-margin-right: 0px; /* Butonlar arasında sağ boşluk */
+color: rgb(244, 226, 67) !important; /* SarÄ± yazÄ± rengi */
+border: none; /* Border'Ä± kaldÄ±r */
+margin-right: 0px; /* Butonlar arasÄ±nda saÄŸ boÅŸluk */
 }
 
 .navbar .dropdown-menu {
-background-color: #fffefe; /* Dropdown menüsünün arka planını koyu yap */
-border: none; /* Menü border'ını kaldır */
+background-color: #fffefe; /* Dropdown menÃ¼sÃ¼nÃ¼n arka planÄ±nÄ± koyu yap */
+border: none; /* MenÃ¼ border'Ä±nÄ± kaldÄ±r */
 }
 
 .navbar .dropdown-item {
-color: rgb(0, 0, 0) !important; /* Dropdown item'ların yazı rengini sarı yap */
+color: rgb(0, 0, 0) !important; /* Dropdown item'larÄ±n yazÄ± rengini sarÄ± yap */
 }
 
 .navbar .dropdown-item:hover {
-background-color: rgb(244, 226, 67) !important; /* Hover durumunda arka plan sarı */
-color: black !important; /* Hover'da yazıyı siyah yap */
+background-color: rgb(244, 226, 67) !important; /* Hover durumunda arka plan sarÄ± */
+color: rgb(255, 248, 248) !important; /* Hover'da yazÄ±yÄ± siyah yap */
 }
 
-/* Navbar'daki butonlar arasında boşluk eklemek için */
+/* Navbar'daki butonlar arasÄ±nda boÅŸluk eklemek iÃ§in */
 .navbar .navbar-nav .nav-link {
-margin-right: 15px; /* Butonlar arasında boşluk */
+margin-right: 15px; /* Butonlar arasÄ±nda boÅŸluk */
 }
 
 .navbar .btn-group {
-margin-right: 15px; /* Dropdown butonları arasına boşluk eklemek için */
+margin-right: 15px; /* Dropdown butonlarÄ± arasÄ±na boÅŸluk eklemek iÃ§in */
 }
-
 
