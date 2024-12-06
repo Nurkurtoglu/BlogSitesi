@@ -109,4 +109,45 @@ margin-right: 15px; /* Butonlar arasındaki boşluğu ayarlama */
 margin-right: 15px; /* Dropdown aralarına boşluk bırakma miktarı*/
 }
 
+/* Haftanın Enleri */
+.weekly-highlights {
+    text-align: left; 
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    gap: 20px; /* Öğeler arasındaki boşluk */
+    padding: 20px 0; /* Kapsayıcıya padding ekle */
+    color: white;  /* Tüm yazıları beyaz yap */
+    padding-left: 80px;  /* Başlıkla sola olan mesafeyi ayarlayabilirsiniz */
+    }
 
+.weekly-highlights .highlight-container {
+    display: flex;
+    flex-wrap: flex-start ;  /* Öğeleri birden fazla satıra sar */
+    justify-content: space-evenly; /* Öğeler arasındaki boşluğu eşit yap */
+    gap: 20px; /* Öğeler arasındaki boşluğu ayarlama */
+    width: 100%;
+}
+
+/* Butonların ve resimlerin genişliğini ve hizalamasını ayarlayalım */
+.weekly-highlights .btn-img-container button {
+    width: 200px !important;  /* Buton genişliği */
+    height: 240px !important; /* Buton yüksekliği */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ccc; /* Butonun etrafında sınır */
+    border-radius: 8px; /* Kenarları yuvarlat */
+    overflow: hidden; /* Resim dışına taşan kısmı gizle */
+    color: white;  /* Butonlardaki yazıyı beyaz yap */
+}
+
+/* Resimlerin boyutunu ayarlama */
+.weekly-highlights .btn-img-container img {
+    width: 100% !important;  /* Resmin genişliğini kapsayıcıya göre ayarla */
+    max-width: 150px !important;  /* Resmin genişliğini 150px ile sınırlama */
+    height: auto !important; /* Yüksekliği orantılı olarak ayarla */
+    object-fit: cover !important; /* Resmi kapsayıcıya uygun şekilde yerleştir */
+}
