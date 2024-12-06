@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
+<!-- Üst menü kısmı  -->
+
 <body>
     <nav class="navbar navbar-expand-lg bg-dark text-white fixed-top">
         <div class="container-fluid">
@@ -17,6 +19,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
     
+<!--Dropdown Filmler  -->
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Filmler</button>
@@ -25,7 +29,8 @@
                         <li><a class="dropdown-item" href="#">En Çok Oy Alan</a></li>
                     </ul>
                 </div>
-    
+<!--Dropdown Diziler  -->
+
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Diziler</button>
                     <ul class="dropdown-menu">
@@ -33,7 +38,8 @@
                         <li><a class="dropdown-item" href="#">En Çok Oy Alan</a></li>
                     </ul>
                 </div>
-    
+<!-- Arama yaparken arama türü seçme-->
+
                 <form action="movie-details.html" method="GET" class="d-flex" role="search" style="position: absolute; top: 10px; right: 350px;">
                     <select name="searchType" class="form-select me-2 bg-dark text-white" style="width: auto;">
                         <option value="movie">Film</option>
@@ -48,16 +54,16 @@
                     <button class="btn btn-sm" type="submit" style="background-color: rgb(188, 126, 222); color: black; border: none; padding: 2px 6px; font-size: 0.8em;">
                         <i class="fas fa-search"></i> Ara
                     </button>
-                </form>
-    
-                <!-- Üye Ol/Giriş Yap butonunu sağa hizalayalım -->
-                <a class="nav-link ms-auto" href="#" style="color: rgb(244, 226, 67)">Üye Ol/Giriş Yap</a>
-            </div>
+                </form>            </div>
         </div>
+<!-- Üye Ol/Giriş Yap butonu -->
+<li><a href="signup.html" style="color: yellow ; position: absolute; right: 25px;">Giriş Yap/Kaydol</a></li> <!-- signup.html'e yönlendirme -->
+
+
+
     </nav>
     
-
-     <!-- Carousel -->
+     <!-- Carousel ana sayfadaki reklamlarımız -->
      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
@@ -141,7 +147,7 @@
         <div style="height: 2000px;"></div>
     
     
-        <!-- Film Detayları -->
+        <!-- Resimlerin altına film isimleri ekleme -->
         <div id="movieDetails" style="padding: 20px; margin-top: 20px; background-color: #333; color: white;"></div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

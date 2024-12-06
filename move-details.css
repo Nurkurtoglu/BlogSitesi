@@ -16,7 +16,7 @@ body {
 }
 
 .navbar .dropdown-toggle {
-    background-color: rgb(13, 110, 253) !important; /* Bootstrap primary rengi */
+    background-color: rgb(2, 2, 2) !important; /* Bootstrap primary rengi */
     color: #fff !important;
     border: none;
     margin-right: 15px;
