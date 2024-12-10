@@ -19,7 +19,7 @@ const pool = new Pool({
     port: 5432,
 });
 
-// Film ekleme veya kontrol işlemi
+// Film ekleme veya kontrol işlemi  veri tabanına ekleme işlemi bu kısımda yapılıyor.
 app.post('/add-movie', async (req, res) => {
     const { tmdb_id, title, release_date, imdb_rating, overview } = req.body;
 
