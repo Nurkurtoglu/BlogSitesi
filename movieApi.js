@@ -36,6 +36,7 @@ async function performSearch(query, type) {
 //Arama sonuçlarını gösteren kısım,  dinamik bir arayüz oluşturur.
 function displayResults(results, type) {
     const resultsDiv = document.getElementById('searchResults');
+    const placeholderImage = 'https://via.placeholder.com/500x750?text=No+Image'; // Yedek resim URL'si
 
     if (!results || results.length === 0) {
         resultsDiv.innerHTML = '<p class="text-center">Sonuç bulunamadı.</p>';
@@ -47,10 +48,10 @@ function displayResults(results, type) {
             case 'movie':
                 return `
                     <div class="movie-card">
-                        <img src="${item.poster_path ? IMAGE_BASE_URL + item.poster_path : 'placeholder.jpg'}" 
+                        <img src="${item.poster_path ? IMAGE_BASE_URL + item.poster_path : placeholderImage}" 
                              alt="${item.title}" 
                              class="movie-poster"
-                             onerror="this.src='placeholder.jpg'">
+                             onerror="this.src='${placeholderImage}'">
                         <div class="movie-info">
                             <h2 class="movie-title">${item.title}</h2>
                             <div class="release-date">
@@ -65,12 +66,13 @@ function displayResults(results, type) {
                         </div>
                     </div>
                 `;
-            // Diğer türler için case 'tv' ve case 'person' burada yer alacak (kodun geri kalanı değişmediği için kısaltılmıştır)
+            // Diğer türler için case 'tv' ve case 'person' burada yer alacak
         }
     }).join('');
 
     resultsDiv.innerHTML = html;
 }
+
 
 
 // dönen sonuçları veritabanına kaydediyor.
