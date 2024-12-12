@@ -37,35 +37,17 @@
                         <li><a class="dropdown-item" href="#">En Çok Oy Alan</a></li>
                     </ul>
                 </div>
-                
-                
+  
                 <!-- Türler Butonu -->
-                <a href="iindex.html" class="btn btn-success ms-3">Türler</a>
-
-<!-- Arama yaparken arama türü seçme-->
-
-                <form action="movie-details.html" method="GET" class="d-flex" role="search" style="position: absolute; top: 10px; right: 350px;">
-                    <select name="searchType" class="form-select me-2 bg-dark text-white" style="width: auto;">
-                        <option value="movie">Film</option>
-                        <option value="tv">Dizi</option>
-                        <option value="person">Kişi</option>
-                    </select>
-                    <input class="form-control me-2 bg-dark text-white" 
-                           type="search" 
-                           name="query"
-                           placeholder="Ara..." 
-                           aria-label="Search">
-                    <button class="btn btn-sm" type="submit" style="background-color: rgb(188, 126, 222); color: black; border: none; padding: 2px 6px; font-size: 0.8em;">
-                        <i class="fas fa-search"></i> Ara
-                    </button>
-                </form>            </div>
+                <a href="turler.html" class="btn btn-success ms-3">Türler</a>
+                
         </div>
 <!-- Üye Ol/Giriş Yap butonu -->
 <li><a href="signup.html" style="color: yellow ; position: absolute; right: 25px;">Giriş Yap/Kaydol</a></li> <!-- signup.html'e yönlendirme -->
 
   </nav>    
-     <!-- Carousel ana sayfadaki reklamlarımız -->
-     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+    <!-- Carousel ana sayfadaki reklamlarımız -->
+    <!-- <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item active">
           <img src="file:///Users/bilgesubaris/Desktop/PROJE/WhatsApp%20Image%202024-11-09%20at%2012.38.51%20(1).jpeg" class="d-block w-100" alt="...">
@@ -91,15 +73,26 @@
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
-      </div>
-     
+      </div> -->
+      <!-- Arama Formu -->
+      <!-- Arama Formu -->
+<form action="movie-details.html" method="GET" class="d-flex search-form">
+  <input 
+      class="form-control search-input" 
+      type="search" 
+      name="query" 
+      placeholder="Ara..." 
+      aria-label="Search">
+  <button class="btn search-btn" type="submit">
+      <i class="fas fa-search"></i>
+  </button>
+</form>
+
     <!-- Bu Haftanın Enleri  -->
     <section class = "weekly-highlights">
       <h1 class="text-white">Bu Haftanın En Çok İzlenen Filmleri</h1>
       <div class="highlight-container" id="weekly-content">
      <script src = "script.js"></script>
-
-        
       </section>
       
   
