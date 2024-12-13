@@ -202,15 +202,19 @@ header {
 }
 /* Arama Formu için Buton */
 .search-btn-container {
-    position: absolute; /* Mutlak konumlandırma */
-    top: 250px; /* Sayfanın üst kısmından 250px aşağıya yerleştir */
+    position: relative; /* Mutlak konumlandırma */
+    margin-top: 150px; /* Sayfanın üst kısmından 250px aşağıya yerleştir */
     left: 50%;
+    text-align: center;
     transform: translateX(-50%); /* Yatayda ortala */
     width: 80%; /* Arama alanının genişliği */
     max-width: 600px; /* Maksimum genişlik */
 }
 
 .search-form {
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
     display: flex;
     width: 100%;
     background-color: #333;
