@@ -64,3 +64,47 @@ h1 {
     border-radius: 10px;
 }
 
+/* Navbar styling */
+nav {
+    background-color: #333;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+nav h1 {
+    color: white;
+    font-size: 24px;
+    margin: 0;
+    flex-grow: 1; /* Makes the h1 take the remaining space */
+}
+
+/* Styling for TVision+ logo */
+.navbar-logo {
+    color: white !important; /* Force the color to be white */
+    font-size: 24px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar-logo:hover {
+    text-decoration: underline;
+}
+
+/* Adjusting the navbar's height */
+.navbar {
+    padding-top: 15px;   /* Add padding to the top */
+    padding-bottom: 15px; /* Add padding to the bottom */
+}
+
+/* Optional: Adjust font size for better balance */
+.navbar-brand {
+    font-size: 1.5em;  /* Increase logo font size */
+}
+
+.navbar-title {
+    font-size: 1.8em;  /* Adjust title font size */
+    margin-top: 0;     /* Ensure the title aligns properly */
+}
