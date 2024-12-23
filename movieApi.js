@@ -115,4 +115,46 @@ async function saveResultsToDatabase(results, type) {
     }
 }
 
+// Modal içerik doldurma fonksiyonu
+function showMovieDetails(movieId) {
+    fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=tr`)
+        .then(response => response.json())
+        .then(data => {
+            const modalContent = `
+                <h3>${data.title} (${data.release_date.split('-')[0]})</h3>
+                <img src="https://image.tmdb.org/t/p/w500${data.poster_path}" alt="${data.title}" class="img-fluid">
+                <p><strong>Özet:</strong> ${data.overview}</p>
+                <p><strong>Türler:</strong> ${data.genres.map(genre => genre.name).join(', ')}</p>
+                <p><strong>Ortalama Puan:</strong> ${data.vote_average}/10</p>
+                <div>
+                    <label for="userComment">Yorumunuzu Ekleyin:</label>
+                    <textarea id="userComment" class="form-control" rows="3"></textarea>
+                    <button class="btn btn-primary mt-2">Gönder</button>
+                </div>
+            `;
+            document.getElementById('modalContent').innerHTML = modalContent;
+            const movieModal = new bootstrap.Modal(document.getElementById('movieModal'));
+            movieModal.show();
+        })
+        .catch(error => console.error('Detaylar yüklenemedi:', error));
+}
+
+// Örnek film sonuçlarını listeleme
+function displaySearchResults(results) {
+    const searchResults = document.getElementById('searchResults');
+    searchResults.innerHTML = '';
+    results.forEach(movie => {
+        const movieElement = document.createElement('div');
+        movieElement.className = 'movie-item';
+        movieElement.innerHTML = `
+            <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.title}" class="img-fluid">
+            <h5>${movie.title}</h5>
+        `;
+        movieElement.addEventListener('click', () => showMovieDetails(movie.id));
+        searchResults.appendChild(movieElement);
+    });
+}
+
+
+
 
