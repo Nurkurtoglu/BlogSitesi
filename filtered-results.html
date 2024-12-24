@@ -12,9 +12,25 @@
     <!-- Üst menü kısmı -->
     <nav class="navbar navbar-expand-lg bg-dark text-white fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">TVISION<span style="color: rgb(244, 226, 67); font-weight: bold; font-size: 1.2em;">+</span></a>
-            
-        </div>
+            <a class="navbar-brand ms-4" href="blogsitesi.html" style="font-weight: 500; font-size: 1.2em;">
+                TVISION<span style="color: rgb(244, 226, 67); font-weight: bold;">+</span>
+            </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Filmler</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Yeni Çıkan</a></li>
+                    <li><a class="dropdown-item" href="#">En Çok Oy Alan</a></li>
+                </ul>
+            </div>
+
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Diziler</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Yeni Çıkan</a></li>
+                    <li><a class="dropdown-item" href="#">En Çok Oy Alan</a></li>
+                </ul>
+            </div>
     </nav>
 
     <!-- Filtrelenmiş Sonuçlar -->
@@ -24,5 +40,7 @@
     </div>
 
     <script src="filtered-results.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 </html>
