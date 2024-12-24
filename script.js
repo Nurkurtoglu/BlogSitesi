@@ -103,9 +103,9 @@ const API_KEY = 'c9d5f0f01b098c021e6964b9fae786dd'; // TMDB API anahtarınızı 
 const BASE_URL = 'https://api.themoviedb.org/3';
 const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
-// Filmleri çek ve listele
+// Filmleri (fetchTrendingMovies)çek ve listele
 async function fetchMovies() {
-    const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&language=tr-TR`);
+    const response = await fetch(`${BASE_URL}/trending/movie/week?api_key=${API_KEY}&language=tr-TR`);
     const data = await response.json();
     displayMovies(data.results);
 }
@@ -158,7 +158,127 @@ document.getElementById('add-comment').addEventListener('click', () => {
     }
 });
 
-// Sayfa yüklendiğinde filmleri çek
-fetchMovies();
+// // Sayfa yüklendiğinde filmleri çek
+// fetchMovies();
+
+
+// Diziler kısmı
+
+// Haftanın en popüler dizilerini çek
+async function fetchTrendingTVShows() {
+    try {
+        const response = await fetch(`${BASE_URL}/trending/tv/week?api_key=${API_KEY}&language=tr-TR`);
+        if (!response.ok) throw new Error("Diziler alınamadı");
+        const data = await response.json();
+        displayTVShows(data.results);
+    } catch (error) {
+        console.error("Diziler yüklenirken hata oluştu:", error);
+    }
+}
+
+// Dizileri listele
+function displayTVShows(tvShows) {
+    const tvShowList = document.getElementById('tv-show-list');
+    tvShowList.innerHTML = '';
+
+    tvShows.forEach(show => {
+        const tvCard = `
+            <div class="col-md-3 mb-4">
+                <div class="card text-white bg-dark">
+                    <img src="${IMG_BASE_URL}${show.poster_path}" class="card-img-top" alt="${show.name}">
+                    <div class="card-body">
+                        <h5 class="card-title">${show.name}</h5>
+                        <button class="btn btn-primary" onclick="showTVDetails(${show.id})">Detayları Gör</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        tvShowList.innerHTML += tvCard;
+    });
+}
+
+// Dizi detaylarını göster
+async function showTVDetails(tvId) {
+    try {
+        const response = await fetch(`${BASE_URL}/tv/${tvId}?api_key=${API_KEY}&language=tr-TR`);
+        if (!response.ok) throw new Error("Dizi detayları alınamadı");
+        const tvData = await response.json();
+
+        // Modal verilerini doldur
+        document.getElementById('tvModalLabel').innerText = tvData.name;
+        document.getElementById('tv-poster').src = `${IMG_BASE_URL}${tvData.poster_path}`;
+        document.getElementById('tv-title').innerText = tvData.name;
+        document.getElementById('tv-overview').innerText = tvData.overview;
+        document.getElementById('tv-rating').innerText = tvData.vote_average;
+
+        // Modal'ı aç
+        new bootstrap.Modal(document.getElementById('tvModal')).show();
+    } catch (error) {
+        console.error("Dizi detayları yüklenirken hata oluştu:", error);
+    }
+}
+
+// Yakında Gelecek Filmleri Çek ve Listele
+async function fetchUpcomingMovies() {
+    const response = await fetch(`${BASE_URL}/movie/upcoming?api_key=${API_KEY}&language=tr-TR`);
+    const data = await response.json();
+    displayUpcoming(data.results, 'upcoming-movie-list', 'movie');
+}
+
+// Bugün Yayınlanacak Dizileri Çek ve Listele
+async function fetchUpcomingTVShows() {
+    const response = await fetch(`${BASE_URL}/tv/airing_today?api_key=${API_KEY}&language=tr-TR`);
+    const data = await response.json();
+    displayUpcoming(data.results, 'upcoming-tv-list', 'tv');
+}
+
+// Yakında Gelecek İçerikleri Listele
+function displayUpcoming(items, containerId, type) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
+
+    items.forEach(item => {
+        const title = type === 'movie' ? item.title : item.name;
+        const posterPath = item.poster_path ? `${IMG_BASE_URL}${item.poster_path}` : 'https://via.placeholder.com/500';
+        const card = `
+            <div class="col-md-3 mb-4">
+                <div class="card text-white bg-dark">
+                    <img src="${posterPath}" class="card-img-top" alt="${title}">
+                    <div class="card-body">
+                        <h5 class="card-title">${title}</h5>
+                        <button class="btn btn-primary" onclick="showDetails('${type}', ${item.id})">Detayları Gör</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        container.innerHTML += card;
+    });
+}
+
+// Detayları Göster
+async function showDetails(type, id) {
+    const response = await fetch(`${BASE_URL}/${type}/${id}?api_key=${API_KEY}&language=tr-TR`);
+    const data = await response.json();
+
+    document.getElementById('details-title').textContent = type === 'movie' ? data.title : data.name;
+    document.getElementById('details-overview').textContent = data.overview || 'Açıklama mevcut değil.';
+    document.getElementById('details-rating').textContent = data.vote_average || 'N/A';
+    document.getElementById('details-poster').src = data.poster_path
+        ? `${IMG_BASE_URL}${data.poster_path}`
+        : 'https://via.placeholder.com/500';
+
+    const modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+    modal.show();
+}
+
+
+// Sayfa yüklendiğinde hem filmleri hem dizileri getir
+document.addEventListener('DOMContentLoaded', () => {
+    fetchMovies(); // Filmler için var olan fonksiyon
+    fetchTrendingTVShows(); // Diziler için eklediğimiz fonksiyon
+    fetchUpcomingMovies();
+    fetchUpcomingTVShows();
+});
+
 
 

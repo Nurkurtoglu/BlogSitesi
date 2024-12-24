@@ -51,8 +51,8 @@
         </button>
     </form>
 
- <!-- Tür Seçimi ve Puan Filtreleme -->
-<section class="filter-section" style="padding: 20px;">
+ Tür Seçimi ve Puan Filtreleme
+<!-- <section class="filter-section" style="padding: 20px;">
   <h2 class="text-white">Filmleri Tür ve Puanla Filtrele</h2>
   <form action="filtered-results.html" method="GET" class="d-flex">
       <div class="row">
@@ -72,9 +72,9 @@
                   <option value="16">Animasyon</option>
                   <option value="35">Komedi</option>
                   <option value="18">Drama</option>
-                  <option value="27">Korku</option>
+                  <option value="27">Korku</option> -->
                   <!-- Diğer türleri buraya ekleyebilirsiniz -->
-              </select>
+              <!-- </select>
           </div>
           <div class="col-md-6 mt-3">
               <label for="rating" class="form-label text-white">En Yüksek Puanlılar:</label>
@@ -87,13 +87,51 @@
       </div>
       <button type="submit" class="btn btn-primary mt-3 ms-3">Filtrele</button>
   </form>
-</section>
+</section> -->
+
+<!-- Tür Seçimi ve Puan Filtreleme -->
+<section class="filter-section" style="padding: 20px;">
+    <h2 class="text-white">Filmleri Tür ve Tarihe Göre Filtrele</h2>
+    <form action="filtered-results.html" method="GET" class="d-flex">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="type" class="form-label text-white">Film/Dizi Seçin:</label>
+                <select name="type" class="form-select" style="width: 200px;">
+                    <option value="movie">Filmler</option>
+                    <option value="tv">Diziler</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="genre" class="form-label text-white">Tür Seçin:</label>
+                <select name="genre" class="form-select" style="width: 200px;">
+                    <option value="">Tür Seçin</option>
+                    <option value="28">Aksiyon</option>
+                    <option value="12">Macera</option>
+                    <option value="16">Animasyon</option>
+                    <option value="35">Komedi</option>
+                    <option value="18">Drama</option>
+                    <option value="27">Korku</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="start-date" class="form-label text-white">Başlangıç Tarihi:</label>
+                <input type="date" name="start-date" class="form-control" style="width: 200px;">
+            </div>
+            <div class="col-md-6">
+                <label for="end-date" class="form-label text-white">Bitiş Tarihi:</label>
+                <input type="date" name="end-date" class="form-control" style="width: 200px;">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3 ms-3">Filtrele</button>
+    </form>
+  </section>
+  
 
 
 
     <!-- Filmler -->
     <div class="container mt-5 pt-5">
-        <h1 class="text-white">Popüler Filmler</h1>
+        <h1 class="text-white">Bu Haftanın Popüler Filmleri</h1>
         <div class="row" id="movie-list">
             <!-- Filmler Dinamik Olarak Buraya Eklenecek -->
         </div>
@@ -132,6 +170,89 @@
             </div>
         </div>
     </div>
+
+    <!-- Diziler -->
+<div class="container mt-5 pt-5">
+    <h1 class="text-white">Bu Haftanın Popüler Dizileri</h1>
+    <div class="row" id="tv-show-list">
+        <!-- Diziler Dinamik Olarak Buraya Eklenecek -->
+    </div>
+</div>
+
+<!-- Diziler Modal -->
+<div class="modal fade" id="tvModal" tabindex="-1" aria-labelledby="tvModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tvModalLabel">Dizi Detayları</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img id="tv-poster" src="" alt="Dizi Afişi" class="img-fluid">
+                    </div>
+                    <div class="col-md-8">
+                        <h3 id="tv-title"></h3>
+                        <p id="tv-overview"></p>
+                        <p><strong>Puan:</strong> <span id="tv-rating"></span></p>
+                        <button class="btn btn-primary" id="tv-like-button"><i class="fas fa-thumbs-up"></i> Beğen</button>
+                    </div>
+                </div>
+                <hr>
+                <h5>Yorumlar</h5>
+                <div id="tv-comments-section">
+                    <!-- Yorumlar Buraya Eklenecek -->
+                </div>
+                <div class="input-group mt-3">
+                    <input type="text" class="form-control" id="tv-comment-input" placeholder="Yorum yazın...">
+                    <button class="btn btn-success" id="tv-add-comment">Gönder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Yakında Gelecek Filmler -->
+    <div class="container mt-5 pt-5">
+        <h1 class="text-white">Yakında Gelecek Filmler</h1>
+        <div class="row" id="upcoming-movie-list">
+            <!-- Filmler Dinamik Olarak Buraya Eklenecek -->
+        </div>
+    </div>
+
+    <!-- Yakında Gelecek Diziler -->
+    <div class="container mt-5 pt-5">
+        <h1 class="text-white">Bugün Yayınlanacak Diziler</h1>
+        <div class="row" id="upcoming-tv-list">
+            <!-- Diziler Dinamik Olarak Buraya Eklenecek -->
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabel">Detaylar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img id="details-poster" src="" alt="Afiş" class="img-fluid">
+                        </div>
+                        <div class="col-md-8">
+                            <h3 id="details-title"></h3>
+                            <p id="details-overview"></p>
+                            <p><strong>Puan:</strong> <span id="details-rating"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
