@@ -248,3 +248,21 @@ header {
     background-color: #d6c72e;
     color: white;
 }
+.scroll-container {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    padding: 10px 0;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.scroll-container .card {
+    margin-right: 15px; /* Space between cards */
+    flex: 0 0 auto; /* Prevent the cards from shrinking */
+    width: 250px; /* Set a fixed width for the cards */
+}
+
+@media (max-width: 768px) {
+    .scroll-container .card {
+        width: 180px; /* Adjust card size on smaller screens */
+    }
+}
