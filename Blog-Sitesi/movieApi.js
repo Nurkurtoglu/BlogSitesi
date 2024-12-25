@@ -1,147 +1,407 @@
+// const API_KEY = 'c9d5f0f01b098c021e6964b9fae786dd';
+// const BASE_URL = 'https://api.themoviedb.org/3';
+// const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+
+// // URL'den arama sorgusunu al
+// const urlParams = new URLSearchParams(window.location.search);
+// const searchQuery = urlParams.get('query');
+
+// if (searchQuery) {
+//     searchMovies(searchQuery);
+// }
+
+// async function searchMovies(query) {
+//     try {
+//         const response = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&language=tr-TR&query=${query}`);
+//         const data = await response.json();
+//         displayResults(data.results);
+//     } catch (error) {
+//         console.error('Arama hatası:', error);
+//     }
+// }
+
+// function displayResults(movies) {
+//     const container = document.getElementById('searchResults');
+//     container.innerHTML = '';
+
+//     const row = document.createElement('div');
+//     row.className = 'row';
+
+//     movies.forEach(movie => {
+//         const movieDiv = document.createElement('div');
+//         movieDiv.className = 'movie-item';
+//         movieDiv.innerHTML = `
+//             <div class="movie-card">
+//                 <div class="movie-poster-container">
+//                     <img src="${movie.poster_path ? IMG_BASE_URL + movie.poster_path : 'https://via.placeholder.com/500x750.png?text=Resim+Bulunamadı'}" 
+//                          alt="${movie.title}" 
+//                          class="movie-poster">
+//                     <div class="movie-overlay">
+//                         <button class="btn-details" 
+//                                 onclick="showMovieDetails(${movie.id})" 
+//                                 data-bs-toggle="modal" 
+//                                 data-bs-target="#movieModal">
+//                             <i class="fas fa-info-circle"></i> Detaylar
+//                         </button>
+//                     </div>
+//                 </div>
+//                 <div class="movie-info">
+//                     <div>
+//                         <h3 class="movie-title">${movie.title}</h3>
+//                         <p class="movie-overview">${movie.overview || 'Açıklama bulunmuyor.'}</p>
+//                     </div>
+//                     <div class="movie-meta">
+//                         <span class="movie-date">
+//                             <i class="far fa-calendar-alt"></i>
+//                             ${movie.release_date ? new Date(movie.release_date).getFullYear() : 'Tarih belirtilmemiş'}
+//                         </span>
+//                         <span class="rating-badge">
+//                             <i class="fas fa-star"></i>
+//                             ${movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'}
+//                         </span>
+//                     </div>
+//                 </div>
+//             </div>
+//         `;
+//         row.appendChild(movieDiv);
+//     });
+
+//     container.appendChild(row);
+// }
+
+// async function showMovieDetails(id) {
+//     try {
+//         const response = await fetch(`${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=tr-TR`);
+//         const movie = await response.json();
+        
+//         document.getElementById('movieModalLabel').textContent = movie.title;
+//         document.getElementById('movie-title').textContent = movie.title;
+//         document.getElementById('movie-overview').textContent = movie.overview;
+//         document.getElementById('movie-rating').textContent = `${movie.vote_average.toFixed(1)}/10`;
+//         document.getElementById('movie-poster').src = `${IMG_BASE_URL}${movie.poster_path}`;
+        
+//         // Beğeni butonunu ayarla
+//         const likeButton = document.getElementById('like-button');
+        
+//         // Beğeni durumunu kontrol et ve butonu güncelle
+//         const isLiked = localStorage.getItem(`movie_${id}_liked`) === 'true';
+//         if (isLiked) {
+//             likeButton.innerHTML = '<i class="fas fa-heart"></i> Beğenildi';
+//             likeButton.style.backgroundColor = '#f4e243';
+//             likeButton.style.color = '#000';
+//             likeButton.style.borderColor = '#f4e243';
+//         } else {
+//             likeButton.innerHTML = '<i class="fas fa-heart"></i> Beğen';
+//             likeButton.style.backgroundColor = '#212529';
+//             likeButton.style.color = '#f4e243';
+//             likeButton.style.borderColor = '#f4e243';
+//         }
+        
+//         // Beğeni butonuna tıklama olayı ekle
+//         likeButton.onclick = function() {
+//             const currentStatus = localStorage.getItem(`movie_${id}_liked`) === 'true';
+//             const newStatus = !currentStatus;
+//             localStorage.setItem(`movie_${id}_liked`, newStatus.toString());
+            
+//             if (newStatus) {
+//                 this.innerHTML = '<i class="fas fa-heart"></i> Beğenildi';
+//                 this.style.backgroundColor = '#f4e243';
+//                 this.style.color = '#000';
+//                 this.style.borderColor = '#f4e243';
+//             } else {
+//                 this.innerHTML = '<i class="fas fa-heart"></i> Beğen';
+//                 this.style.backgroundColor = '#212529';
+//                 this.style.color = '#f4e243';
+//                 this.style.borderColor = '#f4e243';
+//             }
+//         };
+        
+//         // Yorumları göster
+//         const comments = getComments('movie', id);
+//         displayComments('comments-section', comments);
+        
+//         // Yorum ekleme olayını düzelt
+//         document.getElementById('add-comment').onclick = function() {
+//             const nickname = document.getElementById('comment-nickname').value.trim();
+//             const comment = document.getElementById('comment-input').value.trim();
+            
+//             if (!nickname || !comment) {
+//                 alert('Lütfen hem nickname hem de yorum alanını doldurun.');
+//                 return;
+//             }
+            
+//             addComment('movie', id, nickname, comment);
+//             document.getElementById('comment-nickname').value = '';
+//             document.getElementById('comment-input').value = '';
+//             displayComments('comments-section', getComments('movie', id));
+//         };
+//     } catch (error) {
+//         console.error('Film detayları yüklenirken hata:', error);
+//     }
+// }
+
+// // Yorumları göster
+// function displayComments(containerId, comments) {
+//     const container = document.getElementById(containerId);
+//     container.innerHTML = '';
+    
+//     if (comments.length === 0) {
+//         container.innerHTML = '<p class="text-muted">Henüz yorum yapılmamış.</p>';
+//         return;
+//     }
+    
+//     comments.forEach(comment => {
+//         container.innerHTML += `
+//             <div class="comment mb-3">
+//                 <strong class="text-warning">${comment.nickname}</strong>
+//                 <p class="mb-1">${comment.comment}</p>
+//                 <small class="text-muted">${new Date(comment.timestamp).toLocaleString()}</small>
+//             </div>
+//         `;
+//     });
+// }
+
+// // Yorum ekle
+// function addComment(type, id, nickname, comment) {
+//     const key = `${type}_${id}_comments`;
+//     const comments = JSON.parse(localStorage.getItem(key) || '[]');
+    
+//     comments.push({
+//         nickname,
+//         comment,
+//         timestamp: new Date().toISOString()
+//     });
+    
+//     localStorage.setItem(key, JSON.stringify(comments));
+// }
+
+// // Yorumları getir
+// function getComments(type, id) {
+//     const key = `${type}_${id}_comments`;
+//     return JSON.parse(localStorage.getItem(key) || '[]');
+// }
+
+// // Alt arama butonu için arama fonksiyonu
+// function handleSearch(event) {
+//     event.preventDefault();
+//     const searchQuery = document.getElementById('bottom-search-input').value;
+//     if (searchQuery.trim()) {
+//         searchMovies(searchQuery);
+//         // Sayfayı arama sonuçlarına kaydır
+//         document.querySelector('.search-results').scrollIntoView({ behavior: 'smooth' });
+//     }
+// }
+
 const API_KEY = 'c9d5f0f01b098c021e6964b9fae786dd';
 const BASE_URL = 'https://api.themoviedb.org/3';
-const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
+const IMG_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
-document.addEventListener('DOMContentLoaded', () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const query = urlParams.get('query');
-    const searchType = urlParams.get('searchType') || 'movie';
+// URL'den arama sorgusunu al
+const urlParams = new URLSearchParams(window.location.search);
+const searchQuery = urlParams.get('query');
 
-    if (query) {
-        performSearch(query, searchType);
-    }
-});
+if (searchQuery) {
+    searchMovies(searchQuery);
+}
 
-// JSON verisini getirir api ile.
-
-async function performSearch(query, type) {
+async function searchMovies(query) {
     try {
-        const url = `${BASE_URL}/search/${type}?api_key=${API_KEY}&query=${encodeURIComponent(query)}&language=tr-TR`;
-        const response = await fetch(url);
+        const response = await fetch(`${BASE_URL}/search/movie?api_key=${API_KEY}&language=tr-TR&query=${query}`);
         const data = await response.json();
-        
-        // Gelen JSON verisini konsola yazdır
-        console.log("Gelen API Verisi:", data);
-
-        // Sonuçları göster ve veritabanına kaydet
-        displayResults(data.results, type);
-        await saveResultsToDatabase(data.results, type);
+        displayResults(data.results);
+        await saveResultsToDatabase(data.results);
     } catch (error) {
         console.error('Arama hatası:', error);
-        document.getElementById('searchResults').innerHTML =
-            '<p class="text-danger">Arama sırasında bir hata oluştu.</p>';
     }
 }
 
-//Arama sonuçlarını gösteren kısım,  dinamik bir arayüz oluşturur.
-function displayResults(results, type) {
-    const resultsDiv = document.getElementById('searchResults');
-    const placeholderImage = 'https://via.placeholder.com/500x750?text=No+Image'; // Yedek resim URL'si
+function displayResults(movies) {
+    const container = document.getElementById('searchResults');
+    container.innerHTML = '';
 
-    if (!results || results.length === 0) {
-        resultsDiv.innerHTML = '<p class="text-center">Sonuç bulunamadı.</p>';
+    const row = document.createElement('div');
+    row.className = 'row';
+
+    movies.forEach(movie => {
+        const movieDiv = document.createElement('div');
+        movieDiv.className = 'movie-item';
+        movieDiv.innerHTML = `
+            <div class="movie-card">
+                <div class="movie-poster-container">
+                    <img src="${movie.poster_path ? IMG_BASE_URL + movie.poster_path : 'https://via.placeholder.com/500x750.png?text=Resim+Bulunamadı'}" 
+                         alt="${movie.title}" 
+                         class="movie-poster">
+                    <div class="movie-overlay">
+                        <button class="btn-details" 
+                                onclick="showMovieDetails(${movie.id})" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#movieModal">
+                            <i class="fas fa-info-circle"></i> Detaylar
+                        </button>
+                    </div>
+                </div>
+                <div class="movie-info">
+                    <div>
+                        <h3 class="movie-title">${movie.title}</h3>
+                        <p class="movie-overview">${movie.overview || 'Açıklama bulunmuyor.'}</p>
+                    </div>
+                    <div class="movie-meta">
+                        <span class="movie-date">
+                            <i class="far fa-calendar-alt"></i>
+                            ${movie.release_date ? new Date(movie.release_date).getFullYear() : 'Tarih belirtilmemiş'}
+                        </span>
+                        <span class="rating-badge">
+                            <i class="fas fa-star"></i>
+                            ${movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        `;
+        row.appendChild(movieDiv);
+    });
+
+    container.appendChild(row);
+}
+
+async function showMovieDetails(id) {
+    try {
+        const response = await fetch(`${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=tr-TR`);
+        const movie = await response.json();
+        
+        document.getElementById('movieModalLabel').textContent = movie.title;
+        document.getElementById('movie-title').textContent = movie.title;
+        document.getElementById('movie-overview').textContent = movie.overview;
+        document.getElementById('movie-rating').textContent = `${movie.vote_average.toFixed(1)}/10`;
+        document.getElementById('movie-poster').src = `${IMG_BASE_URL}${movie.poster_path}`;
+        
+        // Beğeni butonu ayarla
+        const likeButton = document.getElementById('like-button');
+        
+        const isLiked = localStorage.getItem(`movie_${id}_liked`) === 'true';
+        if (isLiked) {
+            likeButton.innerHTML = '<i class="fas fa-heart"></i> Beğenildi';
+            likeButton.style.backgroundColor = '#f4e243';
+            likeButton.style.color = '#000';
+            likeButton.style.borderColor = '#f4e243';
+        } else {
+            likeButton.innerHTML = '<i class="fas fa-heart"></i> Beğen';
+            likeButton.style.backgroundColor = '#212529';
+            likeButton.style.color = '#f4e243';
+            likeButton.style.borderColor = '#f4e243';
+        }
+        
+        likeButton.onclick = function() {
+            const currentStatus = localStorage.getItem(`movie_${id}_liked`) === 'true';
+            const newStatus = !currentStatus;
+            localStorage.setItem(`movie_${id}_liked`, newStatus.toString());
+            
+            if (newStatus) {
+                this.innerHTML = '<i class="fas fa-heart"></i> Beğenildi';
+                this.style.backgroundColor = '#f4e243';
+                this.style.color = '#000';
+                this.style.borderColor = '#f4e243';
+            } else {
+                this.innerHTML = '<i class="fas fa-heart"></i> Beğen';
+                this.style.backgroundColor = '#212529';
+                this.style.color = '#f4e243';
+                this.style.borderColor = '#f4e243';
+            }
+        };
+        
+        const comments = getComments('movie', id);
+        displayComments('comments-section', comments);
+        
+        document.getElementById('add-comment').onclick = function() {
+            const nickname = document.getElementById('comment-nickname').value.trim();
+            const comment = document.getElementById('comment-input').value.trim();
+            
+            if (!nickname || !comment) {
+                alert('Lütfen hem nickname hem de yorum alanını doldurun.');
+                return;
+            }
+            
+            addComment('movie', id, nickname, comment);
+            document.getElementById('comment-nickname').value = '';
+            document.getElementById('comment-input').value = '';
+            displayComments('comments-section', getComments('movie', id));
+        };
+    } catch (error) {
+        console.error('Film detayları yüklenirken hata:', error);
+    }
+}
+
+async function saveResultsToDatabase(movies) {
+    for (const movie of movies) {
+        const movieData = {
+            tmdb_id: movie.id,
+            title: movie.title,
+            release_date: movie.release_date,
+            imdb_rating: movie.vote_average,
+            overview: movie.overview
+        };
+
+        try {
+            const response = await fetch('http://localhost:3000/add-movie', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(movieData),
+            });
+
+            const data = await response.json();
+            console.log(data.message);
+        } catch (error) {
+            console.error('Veritabanı kaydı sırasında hata oluştu:', error);
+        }
+    }
+}
+
+function displayComments(containerId, comments) {
+    const container = document.getElementById(containerId);
+    container.innerHTML = '';
+    
+    if (comments.length === 0) {
+        container.innerHTML = '<p class="text-muted">Henüz yorum yapılmamış.</p>';
         return;
     }
-
-    const html = results.map(item => {
-        switch (type) {
-            case 'movie':
-                return `
-                    <div class="movie-card">
-                        <img src="${item.poster_path ? IMAGE_BASE_URL + item.poster_path : placeholderImage}" 
-                             alt="${item.title}" 
-                             class="movie-poster"
-                             onerror="this.src='${placeholderImage}'">
-                        <div class="movie-info">
-                            <h2 class="movie-title" onclick="showMovieDetails(${item.id})">${item.title}</h2>
-                            <div class="release-date">
-                                <i class="far fa-calendar-alt"></i> 
-                                ${item.release_date ? new Date(item.release_date).toLocaleDateString('tr-TR') : 'Tarih belirtilmemiş'}
-                            </div>
-                            <div class="rating">
-                                <i class="fas fa-star text-warning"></i> 
-                                ${item.vote_average ? item.vote_average.toFixed(1) : 'N/A'} / 10
-                            </div>
-                            <div class="overview">${item.overview || 'Özet bulunmuyor.'}</div>
-                        </div>
-                    </div>
-                `;
-            // Diğer türler için case 'tv' ve case 'person' burada yer alacak
-        }
-    }).join('');
-
-    resultsDiv.innerHTML = html;
-}
-// Film detaylarını modalda göster
-async function showMovieDetails(movieId) {
-    const response = await fetch(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=tr-TR`);
-    const movie = await response.json();
-
-    document.getElementById('movie-title').textContent = movie.title;
-    document.getElementById('movie-overview').textContent = movie.overview;
-    document.getElementById('movie-rating').textContent = movie.vote_average;
-    document.getElementById('movie-poster').src = `${IMG_BASE_URL}${movie.poster_path}`;
-
-    // Modal aç
-    const movieModal = new bootstrap.Modal(document.getElementById('movieModal'));
-    movieModal.show();
+    
+    comments.forEach(comment => {
+        container.innerHTML += `
+            <div class="comment mb-3">
+                <strong class="text-warning">${comment.nickname}</strong>
+                <p class="mb-1">${comment.comment}</p>
+                <small class="text-muted">${new Date(comment.timestamp).toLocaleString()}</small>
+            </div>
+        `;
+    });
 }
 
-// Yorum ekle
-document.getElementById('add-comment').addEventListener('click', () => {
-    const commentInput = document.getElementById('comment-input');
-    const comment = commentInput.value.trim();
+function addComment(type, id, nickname, comment) {
+    const key = `${type}_${id}_comments`;
+    const comments = JSON.parse(localStorage.getItem(key) || '[]');
+    
+    comments.push({
+        nickname,
+        comment,
+        timestamp: new Date().toISOString()
+    });
+    
+    localStorage.setItem(key, JSON.stringify(comments));
+}
 
-    if (comment) {
-        const commentsSection = document.getElementById('comments-section');
-        commentsSection.innerHTML += `<p>${comment}</p>`;
-        commentInput.value = '';
-    }
-});
+function getComments(type, id) {
+    const key = `${type}_${id}_comments`;
+    return JSON.parse(localStorage.getItem(key) || '[]');
+}
 
-
-
-// dönen sonuçları veritabanına kaydediyor.
-async function saveResultsToDatabase(results, type) {
-    for (const item of results) {
-        // Sadece film veya dizi türü için kaydetme işlemi
-        if (type === 'movie' || type === 'tv') {
-            const releaseDate = type === 'movie' 
-                ? item.release_date 
-                : item.first_air_date;
-
-            // Tarihi 'YYYY-MM-DD' formatına dönüştürme
-            const formattedDate = releaseDate 
-                ? new Date(releaseDate).toISOString().split('T')[0] // 'YYYY-MM-DD' formatına dönüştürme
-                : null;
-
-            const movieData = {
-                tmdb_id: item.id,
-                title: type === 'movie' ? item.title : item.name,
-                release_date: formattedDate,  // Formatlı tarih
-                imdb_rating: item.vote_average,  // IMDb benzeri puan (vote_average)
-                overview: item.overview,
-                // poster_path: item.poster_path, // İstenirse poster path eklenebilir
-            };
-
-            try {
-                const response = await fetch('http://localhost:3000/add-movie', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(movieData),
-                });
-
-                const data = await response.json();
-                console.log(data.message);
-                console.log("Veritabanına Kaydedilen Veri:", movieData);
-            } catch (error) {
-                console.error('Veritabanı kaydı sırasında hata oluştu:', error);
-            }
-        }
+function handleSearch(event) {
+    event.preventDefault();
+    const searchQuery = document.getElementById('bottom-search-input').value;
+    if (searchQuery.trim()) {
+        searchMovies(searchQuery);
+        document.querySelector('.search-results').scrollIntoView({ behavior: 'smooth' });
     }
 }
-
-
 
 
 

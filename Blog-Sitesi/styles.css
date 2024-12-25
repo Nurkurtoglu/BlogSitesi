@@ -1,0 +1,142 @@
+.dropdown-container {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #f8f9fa;
+}
+
+.details-btn {
+    padding: 5px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.details-btn:hover {
+    background-color: #0056b3;
+}
+
+.dropdown-content {
+    padding: 15px;
+    display: none;
+}
+
+.dropdown-content.active {
+    display: block;
+}
+
+/* Modal başlığı için stil */
+.modal-title {
+    color: #f4e243 !important; /* Sarı renk */
+    font-weight: bold;
+}
+
+/* Modal ve detay butonları için ortak stil */
+/* Modal başlığı için stil */
+.modal-title {
+    color: #f4e243 !important; /* Sarı renk */
+    font-weight: bold;
+}
+
+/* Modal ve detay butonları için ortak stil */
+.btn-details {
+    background-color: #6c757d !important;
+    color: #f4e243 !important;
+    border: 2px solid #f4e243 !important;
+    padding: 8px 16px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+   ;
+}
+
+.btn-details:hover {
+    background-color: #5a6268 !important;
+}
+
+/* Modal başlık ID'leri için özel stil */
+#detailsModalLabel, #movieModalLabel, #tvModalLabel {
+    color: #f4e243 !important; /* Sarı renk */
+    font-weight: bold;
+}
+
+/* Siyah arka plan için stiller */
+body.bg-dark {
+    background-color: #000000 !important;
+}
+
+.container {
+    background-color: #000000;
+}
+
+/* Kart stilleri */
+.card {
+    background-color: #212529 !important;
+    border: 1px solid #f4e243;
+}
+
+.card-body {
+    color: #fff;
+}
+
+.modal-content {
+    background-color: #212529 !important;
+    color: #fff !important;
+}
+
+/* Yorum kutuları için stiller */
+.form-control {
+    background-color: #212529 !important;
+    border: 1px solid #f4e243 !important;
+    color: #fff !important;
+}
+
+.form-control:focus {
+    background-color: #2c3034 !important;
+    border-color: #f4e243 !important;
+    box-shadow: 0 0 0 0.2rem rgba(244, 226, 67, 0.25) !important;
+    color: #fff !important;
+}
+
+.form-control::placeholder {
+    color: #6c757d !important;
+}
+
+/* Textarea için özel stil */
+textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Arama butonu için stiller */
+.search-input {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #f4e243 !important;
+}
+
+.search-input::placeholder {
+    color: #6c757d !important;
+}
+
+.search-input:focus {
+    background-color: #ffffff !important;
+    border-color: #f4e243 !important;
+    box-shadow: 0 0 0 0.2rem rgba(244, 226, 67, 0.25) !important;
+    color: #000000 !important;
+}
+
+/* Diğer form elemanları için koyu tema devam etsin */
+.form-control:not(.search-input) {
+    background-color: #212529 !important;
+    border: 1px solid #f4e243 !important;
+    color: #fff !important;
+}

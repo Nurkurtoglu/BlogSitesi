@@ -358,4 +358,14 @@ function updateLikeButton(button, isLiked) {
     }
 }
 
+document.querySelectorAll('.details-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const content = button.closest('.dropdown-container').querySelector('.dropdown-content');
+        content.classList.toggle('active');
+        
+        // Buton metnini değiştir
+        button.textContent = content.classList.contains('active') ? 'Gizle' : 'Detayları Gör';
+    });
+});
+
 

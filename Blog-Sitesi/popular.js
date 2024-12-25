@@ -37,16 +37,23 @@ function displayMovies(movies) {
         const movieCard = `
             <div class="col-md-3 mb-4">
                 <div class="card text-white bg-dark">
-                    <img src="${IMG_BASE_URL}${movie.poster_path}" class="card-img-top" alt="${movie.title}">
+                    <img src="${IMG_BASE_URL}${movie.poster_path}" 
+                         class="card-img-top" 
+                         alt="${movie.title}"
+                         onerror="this.src='https://via.placeholder.com/500x750.png?text=Resim+Bulunamadı'">
                     <div class="card-body">
                         <h5 class="card-title">${movie.title}</h5>
-                        <button class="btn w-100" 
-                                style="background-color: #0d6efd; color: #f4e243; font-weight: bold;" 
-                                onmouseover="this.style.backgroundColor='#0b5ed7'" 
-                                onmouseout="this.style.backgroundColor='#0d6efd'"
-                                onclick="showMovieDetails(${movie.id})">
-                            Detayları Gör
-                        </button>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-details" 
+                                    onclick="showMovieDetails(${movie.id})"
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#movieModal">
+                                Detaylar
+                            </button>
+                            <span class="badge bg-warning text-dark">
+                                ${movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'}/10
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,55 +63,72 @@ function displayMovies(movies) {
 }
 
 // Film detaylarını göster
-async function showMovieDetails(movieId) {
+async function showMovieDetails(id) {
     try {
-        const response = await fetch(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=tr-TR`);
+        const response = await fetch(`${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=tr-TR`);
         const movie = await response.json();
         
-        const isLiked = getLikeStatus('movie', movieId);
-        const comments = getComments('movie', movieId);
-        
         document.getElementById('movieModalLabel').textContent = movie.title;
-        document.getElementById('movie-poster').src = `${IMG_BASE_URL}${movie.poster_path}`;
         document.getElementById('movie-title').textContent = movie.title;
         document.getElementById('movie-overview').textContent = movie.overview;
         document.getElementById('movie-rating').textContent = `${movie.vote_average.toFixed(1)}/10`;
+        document.getElementById('movie-poster').src = `${IMG_BASE_URL}${movie.poster_path}`;
         
-        // Beğeni butonunu güncelle
+        // Beğeni butonunu ayarla
         const likeButton = document.getElementById('like-button');
-        likeButton.className = `btn ${isLiked ? 'btn-success' : 'btn-primary'} me-2`;
-        likeButton.innerHTML = `<i class="fas fa-thumbs-up"></i> ${isLiked ? 'Beğenildi' : 'Beğen'}`;
+        
+        // Beğeni durumunu kontrol et ve butonu güncelle
+        const isLiked = localStorage.getItem(`movie_${id}_liked`) === 'true';
+        if (isLiked) {
+            likeButton.innerHTML = '<i class="fas fa-heart"></i> Beğenildi';
+            likeButton.style.backgroundColor = '#f4e243'; // Sarı arka plan
+            likeButton.style.color = '#000'; // Siyah kalp ve yazı
+            likeButton.style.borderColor = '#f4e243'; // Sarı kenarlık
+        } else {
+            likeButton.innerHTML = '<i class="fas fa-heart"></i> Beğen';
+            likeButton.style.backgroundColor = '#212529'; // Bootstrap dark rengi
+            likeButton.style.color = '#f4e243'; // Sarı kalp ve yazı
+            likeButton.style.borderColor = '#f4e243'; // Sarı kenarlık
+        }
         
         // Beğeni butonuna tıklama olayı ekle
-        likeButton.onclick = () => {
-            const newIsLiked = toggleLike('movie', movieId);
-            updateLikeButton(likeButton, newIsLiked);
-            displayMovies(allMovies);
+        likeButton.onclick = function() {
+            const currentStatus = localStorage.getItem(`movie_${id}_liked`) === 'true';
+            const newStatus = !currentStatus;
+            localStorage.setItem(`movie_${id}_liked`, newStatus.toString());
+            
+            if (newStatus) {
+                this.innerHTML = '<i class="fas fa-heart"></i> Beğenildi';
+                this.style.backgroundColor = '#f4e243'; // Sarı arka plan
+                this.style.color = '#000'; // Siyah kalp ve yazı
+                this.style.borderColor = '#f4e243'; // Sarı kenarlık
+            } else {
+                this.innerHTML = '<i class="fas fa-heart"></i> Beğen';
+                this.style.backgroundColor = '#212529'; // Bootstrap dark rengi
+                this.style.color = '#f4e243'; // Sarı kalp ve yazı
+                this.style.borderColor = '#f4e243'; // Sarı kenarlık
+            }
         };
         
         // Yorumları göster
+        const comments = getComments('movie', id);
         displayComments('comments-section', comments);
         
-        // Yorum gönderme olayını ekle
-        document.getElementById('add-comment').onclick = () => {
+        // Yorum ekleme olayını düzelt
+        document.getElementById('add-comment').onclick = function() {
             const nickname = document.getElementById('comment-nickname').value.trim();
             const comment = document.getElementById('comment-input').value.trim();
             
-            if (!nickname) {
-                alert('Lütfen bir nickname girin!');
-                return;
-            }
-            if (!comment) {
-                alert('Lütfen bir yorum yazın!');
+            if (!nickname || !comment) {
+                alert('Lütfen hem nickname hem de yorum alanını doldurun.');
                 return;
             }
             
-            addComment('movie', movieId, nickname, comment);
+            addComment('movie', id, nickname, comment);
+            document.getElementById('comment-nickname').value = '';
             document.getElementById('comment-input').value = '';
-            displayComments('comments-section', getComments('movie', movieId));
+            displayComments('comments-section', getComments('movie', id));
         };
-        
-        new bootstrap.Modal(document.getElementById('movieModal')).show();
     } catch (error) {
         console.error('Film detayları yüklenirken hata:', error);
     }
@@ -230,18 +254,23 @@ function displayTVShows(shows) {
         const tvCard = `
             <div class="col-md-3 mb-4">
                 <div class="card text-white bg-dark">
-                    <img src="${IMG_BASE_URL}${show.poster_path}" class="card-img-top" alt="${show.name}">
+                    <img src="${IMG_BASE_URL}${show.poster_path}" 
+                         class="card-img-top" 
+                         alt="${show.name}"
+                         onerror="this.src='https://via.placeholder.com/500x750.png?text=Resim+Bulunamadı'">
                     <div class="card-body">
                         <h5 class="card-title">${show.name}</h5>
-                        <button class="btn w-100" 
-                                style="background-color: #0d6efd; color: #f4e243; font-weight: bold;"
-                                onmouseover="this.style.backgroundColor='#0b5ed7'" 
-                                onmouseout="this.style.backgroundColor='#0d6efd'"
-                                onclick="showTVDetails(${show.id})"
-                                data-bs-toggle="modal" 
-                                data-bs-target="#detailsModal">
-                            Detayları Gör
-                        </button>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-details" 
+                                    onclick="showTVDetails(${show.id})"
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#detailsModal">
+                                Detaylar
+                            </button>
+                            <span class="badge bg-warning text-dark">
+                                ${show.vote_average ? show.vote_average.toFixed(1) : 'N/A'}/10
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -285,46 +314,59 @@ async function showTVDetails(id) {
         
         // Beğeni butonunu ayarla
         const likeButton = document.getElementById('details-like-button');
-        likeButton.style.backgroundColor = '#474c52'; // Koyu gri arka plan
-        likeButton.style.color = '#f4e243'; // Sarı yazı
-        likeButton.style.borderColor = '#f4e243'; // Sarı kenarlık
         
-        // Hover efektleri
-        likeButton.onmouseover = function() {
-            this.style.backgroundColor = '#3a3e43'; // Hover durumunda biraz daha koyu
-        }
-        likeButton.onmouseout = function() {
-            this.style.backgroundColor = '#474c52';
+        // Beğeni durumunu kontrol et ve butonu güncelle
+        const isLiked = localStorage.getItem(`tv_${id}_liked`) === 'true';
+        if (isLiked) {
+            likeButton.innerHTML = '<i class="fas fa-heart"></i> Beğenildi';
+            likeButton.style.backgroundColor = '#f4e243'; // Sarı arka plan
+            likeButton.style.color = '#000'; // Siyah kalp ve yazı
+            likeButton.style.borderColor = '#f4e243'; // Sarı kenarlık
+        } else {
+            likeButton.innerHTML = '<i class="fas fa-heart"></i> Beğen';
+            likeButton.style.backgroundColor = '#212529'; // Bootstrap dark rengi
+            likeButton.style.color = '#f4e243'; // Sarı kalp ve yazı
+            likeButton.style.borderColor = '#f4e243'; // Sarı kenarlık
         }
         
-        likeButton.onclick = () => handleLike('tv', id);
+        // Beğeni butonuna tıklama olayı ekle
+        likeButton.onclick = function() {
+            const currentStatus = localStorage.getItem(`tv_${id}_liked`) === 'true';
+            const newStatus = !currentStatus;
+            localStorage.setItem(`tv_${id}_liked`, newStatus.toString());
+            
+            if (newStatus) {
+                this.innerHTML = '<i class="fas fa-heart"></i> Beğenildi';
+                this.style.backgroundColor = '#f4e243'; // Sarı arka plan
+                this.style.color = '#000'; // Siyah kalp ve yazı
+                this.style.borderColor = '#f4e243'; // Sarı kenarlık
+            } else {
+                this.innerHTML = '<i class="fas fa-heart"></i> Beğen';
+                this.style.backgroundColor = '#212529'; // Bootstrap dark rengi
+                this.style.color = '#f4e243'; // Sarı kalp ve yazı
+                this.style.borderColor = '#f4e243'; // Sarı kenarlık
+            }
+        };
         
         // Yorumları göster
         const comments = getComments('tv', id);
         displayComments('details-comments-section', comments);
         
-        // Yorum gönderme olayını ekle
-        document.getElementById('add-comment').onclick = () => {
+        // Yorum ekleme olayını düzelt
+        document.querySelector('.btn-outline-warning[onclick="addDetailsComment()"]').onclick = function() {
             const nickname = document.getElementById('details-nickname-input').value.trim();
             const comment = document.getElementById('details-comment-input').value.trim();
             
-            if (!nickname) {
-                alert('Lütfen bir nickname girin!');
-                return;
-            }
-            if (!comment) {
-                alert('Lütfen bir yorum yazın!');
+            if (!nickname || !comment) {
+                alert('Lütfen hem nickname hem de yorum alanını doldurun.');
                 return;
             }
             
             addComment('tv', id, nickname, comment);
+            document.getElementById('details-nickname-input').value = '';
             document.getElementById('details-comment-input').value = '';
             displayComments('details-comments-section', getComments('tv', id));
         };
-        
-        // Modal'ı göster
-        const modal = new bootstrap.Modal(document.getElementById('detailsModal'));
-        modal.show();
     } catch (error) {
         console.error('Dizi detayları yüklenirken hata:', error);
     }
@@ -343,3 +385,62 @@ function handleLike(type, id) {
     likeCount.textContent = `${likes} beğeni`;
     likeCount.style.color = '#f4e243'; // Sarı renk
 }
+
+// Yıl seçeneklerini oluştur
+function createYearOptions() {
+    const currentYear = new Date().getFullYear();
+    const yearSelect = document.getElementById('yearSelect');
+    yearSelect.innerHTML = '<option value="">Tüm Yıllar</option>';
+    
+    for (let year = currentYear; year >= 1900; year--) {
+        yearSelect.innerHTML += `<option value="${year}">${year}</option>`;
+    }
+}
+
+// Filtreleme fonksiyonunu güncelle
+function filterContent() {
+    const selectedGenre = document.getElementById('genreSelect').value;
+    const selectedYear = document.getElementById('yearSelect').value;
+    const currentPage = window.location.pathname;
+
+    if (currentPage.includes('populer-filmler.html')) {
+        let filteredMovies = [...allMovies];
+
+        if (selectedGenre) {
+            filteredMovies = filteredMovies.filter(movie => 
+                movie.genre_ids.includes(parseInt(selectedGenre))
+            );
+        }
+
+        if (selectedYear) {
+            filteredMovies = filteredMovies.filter(movie => {
+                const movieYear = new Date(movie.release_date).getFullYear();
+                return movieYear === parseInt(selectedYear);
+            });
+        }
+
+        displayMovies(filteredMovies);
+    } else if (currentPage.includes('populer-diziler.html')) {
+        let filteredShows = [...allShows];
+
+        if (selectedGenre) {
+            filteredShows = filteredShows.filter(show => 
+                show.genre_ids.includes(parseInt(selectedGenre))
+            );
+        }
+
+        if (selectedYear) {
+            filteredShows = filteredShows.filter(show => {
+                const showYear = new Date(show.first_air_date).getFullYear();
+                return showYear === parseInt(selectedYear);
+            });
+        }
+
+        displayTVShows(filteredShows);
+    }
+}
+
+// Sayfa yüklendiğinde yıl seçeneklerini oluştur
+document.addEventListener('DOMContentLoaded', function() {
+    createYearOptions();
+});

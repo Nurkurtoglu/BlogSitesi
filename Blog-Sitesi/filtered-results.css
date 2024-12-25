@@ -6,7 +6,36 @@ body {
     margin: 0;
     padding: 0;
 }
-
+.navbar .dropdown-toggle {
+    background-color: #333 !important; 
+    color: rgb(244, 226, 67) !important; 
+    border: none; 
+    margin-right: 0px; /* Butonlar arasında boşluk */
+    }
+    
+    .navbar .dropdown-menu {
+    background-color: #fffefe; /* Dropdown menüsünün arka planını koyu yap */
+    border: none; /* MenÃ¼ border'Ä±nÄ± kaldÄ±r */
+    }
+    
+    .navbar .dropdown-item {
+    color: rgb(0, 0, 0) !important; /* Dropdown item'ların yazı rengini siyah  yap */
+    }
+    
+    .navbar .dropdown-item:hover {
+    background-color: rgb(244, 226, 67) !important; /* Hover durumunda arka plan sarı  */
+    color: rgb(7, 14, 74) !important; /* Hover'da siyah yap */
+    }
+    
+    /* Navbar'daki butonlar arasında boşluklar eklemek*/
+    .navbar .navbar-nav .nav-link {
+    margin-right: 15px; /* Butonlar arasındaki boşluğu ayarlama */
+    }
+    
+    .navbar .btn-group {
+    margin-right: 15px; /* Dropdown aralarına boşluk bırakma miktarı*/
+    }
+    
 .navbar {
     background-color: #1e1e1e;
 }

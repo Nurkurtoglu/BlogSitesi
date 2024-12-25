@@ -6,10 +6,8 @@
     <title>Film Detayları</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.rtl.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    <!-- <link rel="stylesheet" href="movie-details.css"> -->
+    <link rel="stylesheet" href="blogsitesi.css">
     <link rel="stylesheet" href="movieStyles.css">
-
     <link rel="stylesheet" href="movie-details.css">
 
     <style>
@@ -20,7 +18,7 @@
     </style>
 </head>
 <body>
-    <!-- Navbar buraya gelecek -->
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg bg-dark text-white fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand ms-4" href="blogsitesi.html" style="font-weight: 500; font-size: 1.2em;">
@@ -29,30 +27,81 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-  
-                <!-- Arama Formu -->
-            
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Filmler</button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="yeni-filmler.html">Yeni Çıkan</a></li>
+                        <li><a class="dropdown-item" href="populer-filmler.html">En Çok Oy Alan</a></li>
+                    </ul>
+                </div>
+
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Diziler</button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="yeni-diziler.html">Vizyona Girecek</a></li>
+                        <li><a class="dropdown-item" href="populer-diziler.html">En Çok Oy Alan</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
-    <form action="movie-details.html" method="GET" class="d-flex search-form">
-        <input 
-            class="form-control search-input" 
-            type="search" 
-            name="query" 
-            placeholder="Ara..." 
-            aria-label="Search">
-        <button class="btn search-btn" type="submit">
-            <i class="fas fa-search"></i>
-        </button>
-      </form>
-    <!-- Api key ile arama yapma -->
-    <script src = "movieApi.js"></script>
+
+
+    <!-- Arama Butonu -->
+    <div class="search-btn-container">
+        <form class="search-form" onsubmit="handleSearch(event)">
+            <input type="text" class="search-input" id="bottom-search-input" placeholder="Ara...">
+            <button type="submit" class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+    </div>
+    <!-- Arama Sonuçları -->
     <div class="search-results">
         <h3>Arama Sonuçları</h3>
         <div id="searchResults"></div>
     </div>
+
+
+    <!-- Film Detay Modalı -->
+    <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content bg-dark text-white">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="movieModalLabel"></h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img id="movie-poster" src="" alt="Film Posteri" class="img-fluid">
+                        </div>
+                        <div class="col-md-8">
+                            <h3 id="movie-title"></h3>
+                            <p id="movie-overview"></p>
+                            <p>Puan: <span id="movie-rating"></span></p>
+                            <button id="like-button" class="btn btn-outline-warning mb-3">
+                                <i class="fas fa-heart"></i> Beğen
+                            </button>
+                            <div class="comments-section">
+                                <h4>Yorumlar</h4>
+                                <div id="comments-section"></div>
+                                <div class="mt-3">
+                                    <input type="text" id="comment-nickname" class="form-control mb-2" placeholder="Nickname">
+                                    <textarea id="comment-input" class="form-control mb-2" placeholder="Yorumunuz..."></textarea>
+                                    <button id="add-comment" class="btn btn-outline-warning">Yorum Ekle</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="movieApi.js"></script>
 
 </body>
 </html>

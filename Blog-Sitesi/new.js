@@ -75,16 +75,24 @@ function displayMovies(movies) {
         const movieCard = `
             <div class="col-md-3 mb-4">
                 <div class="card text-white bg-dark">
-                    <img src="${IMG_BASE_URL}${movie.poster_path}" class="card-img-top" alt="${movie.title}">
+                    <img src="${IMG_BASE_URL}${movie.poster_path}" 
+                         class="card-img-top" 
+                         alt="${movie.title}"
+                         onerror="this.src='https://via.placeholder.com/500x750.png?text=Resim+Bulunamadı'">
                     <div class="card-body">
                         <h5 class="card-title">${movie.title}</h5>
-                        <button class="btn w-100" 
-                                style="background-color: #0d6efd; color: #f4e243; font-weight: bold;" 
-                                onmouseover="this.style.backgroundColor='#0b5ed7'" 
-                                onmouseout="this.style.backgroundColor='#0d6efd'"
-                                onclick="showMovieDetails(${movie.id})">
-                            Detayları Gör
-                        </button>
+                        <p class="card-text small">${movie.release_date ? new Date(movie.release_date).toLocaleDateString('tr-TR') : 'Tarih belirtilmemiş'}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <button class="btn btn-details" 
+                                    onclick="showMovieDetails(${movie.id})"
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#detailsModal">
+                                Detaylar
+                            </button>
+                            <span class="badge bg-warning text-dark">
+                                ${movie.vote_average ? movie.vote_average.toFixed(1) : 'N/A'}/10
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -137,58 +145,94 @@ function displayTVShows(shows) {
     });
 }
 
-// Film detaylarını göster
-async function showMovieDetails(movieId) {
-    document.getElementById('detailsModal').setAttribute('data-content-id', movieId);
+// Dizi detaylarını gösteren fonksiyon
+async function showMovieDetails(id) {
     try {
-        const response = await fetch(`${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=tr-TR`);
+        const response = await fetch(`${BASE_URL}/movie/${id}?api_key=${API_KEY}&language=tr-TR`);
         const movie = await response.json();
         
-        const isLiked = getLikeStatus('movie', movieId);
-        const comments = getComments('movie', movieId);
-        
         document.getElementById('detailsModalLabel').textContent = movie.title;
-        document.getElementById('details-poster').src = `${IMG_BASE_URL}${movie.poster_path}`;
         document.getElementById('details-title').textContent = movie.title;
         document.getElementById('details-overview').textContent = movie.overview;
         document.getElementById('details-rating').textContent = `${movie.vote_average.toFixed(1)}/10`;
+        document.getElementById('details-poster').src = `${IMG_BASE_URL}${movie.poster_path}`;
         
-        // Beğeni butonunu güncelle
+        // Beğeni butonunu ayarla
         const likeButton = document.getElementById('details-like-button');
-        updateLikeButton(likeButton, isLiked);
+        likeButton.style.backgroundColor = '#474c52';
+        likeButton.style.color = '#f4e243';
+        likeButton.style.borderColor = '#f4e243';
+        
+        // Hover efektleri
+        likeButton.onmouseover = function() {
+            this.style.backgroundColor = '#3a3e43';
+        }
+        likeButton.onmouseout = function() {
+            this.style.backgroundColor = '#474c52';
+        }
+        
+        likeButton.onclick = () => handleLike('movie', id);
         
         // Yorumları göster
+        const comments = getComments('movie', id);
         displayComments('details-comments-section', comments);
         
-        new bootstrap.Modal(document.getElementById('detailsModal')).show();
+        // Yorum gönderme olayını ekle
+        document.getElementById('add-comment').onclick = () => {
+            const nickname = document.getElementById('details-nickname-input').value.trim();
+            const comment = document.getElementById('details-comment-input').value.trim();
+            
+            if (!nickname || !comment) {
+                alert('Lütfen hem nickname hem de yorum alanını doldurun.');
+                return;
+            }
+            
+            addComment('movie', id, nickname, comment);
+            document.getElementById('details-nickname-input').value = '';
+            document.getElementById('details-comment-input').value = '';
+            displayComments('details-comments-section', getComments('movie', id));
+        };
     } catch (error) {
         console.error('Film detayları yüklenirken hata:', error);
     }
 }
 
-// Beğeni ve yorum fonksiyonları
-function getLikeStatus(type, id) {
-    const key = `${type}_${id}_liked`;
-    return localStorage.getItem(key) === 'true';
+// Beğeni olayını işle
+function handleLike(type, id) {
+    const isLiked = toggleLike(type, id);
+    const likeButton = document.getElementById('details-like-button');
+    const likeCount = document.getElementById('details-like-count');
+    
+    updateLikeButton(likeButton, isLiked);
+    
+    // Beğeni sayısını güncelle
+    const likes = getLikeCount(type, id);
+    likeCount.textContent = `${likes} beğeni`;
+    likeCount.style.color = '#f4e243'; // Sarı renk
 }
 
+// Yardımcı fonksiyonlar
 function toggleLike(type, id) {
     const key = `${type}_${id}_liked`;
-    const currentStatus = getLikeStatus(type, id);
-    const newStatus = !currentStatus;
-    localStorage.setItem(key, newStatus.toString());
-    return newStatus;
+    const isLiked = localStorage.getItem(key) === 'true';
+    localStorage.setItem(key, (!isLiked).toString());
+    return !isLiked;
+}
+
+function getLikeCount(type, id) {
+    const key = `${type}_${id}_likes`;
+    return parseInt(localStorage.getItem(key) || '0');
 }
 
 function updateLikeButton(button, isLiked) {
     if (isLiked) {
         button.innerHTML = '<i class="fas fa-heart"></i> Beğenildi';
-        button.classList.remove('btn-outline-warning');
-        button.classList.add('btn-warning');
+        button.style.backgroundColor = '#f4e243';
+        button.style.color = '#000';
     } else {
         button.innerHTML = '<i class="far fa-heart"></i> Beğen';
-        button.classList.remove('btn-warning');
-        button.classList.add('btn-outline-warning');
+        button.style.backgroundColor = '#474c52';
+        button.style.color = '#f4e243';
     }
 }
 
@@ -197,21 +241,22 @@ function getComments(type, id) {
     return JSON.parse(localStorage.getItem(key) || '[]');
 }
 
+function addComment(type, id, nickname, comment) {
+    const comments = getComments(type, id);
+    comments.push({
+        nickname,
+        comment,
+        date: new Date().toLocaleDateString('tr-TR')
+    });
+    localStorage.setItem(`${type}_${id}_comments`, JSON.stringify(comments));
+}
+
 function displayComments(containerId, comments) {
     const container = document.getElementById(containerId);
-    if (comments.length === 0) {
-        container.innerHTML = '<p class="text-muted">Henüz yorum yapılmamış.</p>';
-        return;
-    }
-    
     container.innerHTML = comments.map(comment => `
-        <div class="comment mb-3">
-            <div class="d-flex justify-content-between">
-                <strong class="text-primary">${comment.nickname}</strong>
-                <small class="text-muted">${comment.date}</small>
-            </div>
+        <div class="comment mb-2">
+            <strong>${comment.nickname}</strong> - ${comment.date}
             <p class="mb-1">${comment.comment}</p>
-            <hr>
         </div>
     `).join('');
 }
