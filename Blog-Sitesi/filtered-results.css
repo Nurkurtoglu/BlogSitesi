@@ -1,0 +1,172 @@
+/* Temel düzen */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #1e1e1e;
+}
+
+.navbar-brand {
+    font-size: 1.8em;
+    color: #f7f7f7;
+}
+
+.navbar-brand span {
+    font-weight: bold;
+}
+
+.navbar-nav {
+    margin-left: auto;
+}
+
+.navbar-nav .btn-group {
+    margin-right: 20px;
+}
+
+.navbar-nav .btn {
+    color: #fff;
+}
+
+.navbar-nav .dropdown-menu {
+    background-color: #333;
+}
+
+/* Başlıklar */
+h1, h2, h3 {
+    color: #f4e243;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Filtreleme Sonuçları */
+.container {
+    max-width: 1200px;
+    margin: 80px auto;
+    padding: 0 15px;
+}
+
+/* Resim ve yazı düzeni */
+#searchResults {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.movie-card, .tv-card {
+    background-color: #222;
+    padding: 20px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.movie-card:hover, .tv-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.movie-poster, .tv-poster {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.movie-info, .tv-info {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.movie-title, .tv-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #f4e243;
+}
+
+.release-date, .first-air-date {
+    font-size: 1em;
+    color: #aaa;
+    margin-bottom: 5px;
+}
+
+.rating {
+    color: #f4e243;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.overview {
+    margin-top: 10px;
+    font-size: 1em;
+    color: #ddd;
+    text-align: justify;
+    line-height: 1.4;
+    max-height: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Filtreleme Sonuçları - responsive */
+@media (max-width: 768px) {
+    .movie-card, .tv-card {
+        max-width: 48%;
+    }
+}
+
+@media (max-width: 480px) {
+    .movie-card, .tv-card {
+        max-width: 100%;
+    }
+
+    .movie-poster, .tv-poster {
+        height: 300px;
+    }
+}
+
+/* "Sonuç Bulunamadı" mesajı */
+.no-results {
+    text-align: center;
+    font-size: 1.3em;
+    color: #fff;
+    margin-top: 50px;
+    font-weight: bold;
+}
+.navbar .dropdown-toggle {
+    background-color: #333 !important; 
+    color: rgb(244, 226, 67) !important; 
+    border: none; 
+    margin-right: 0px; /* Butonlar arasında boşluk */
+    }
+    
+    .navbar .dropdown-menu {
+    background-color: #fffefe; /* Dropdown menüsünün arka planını koyu yap */
+    border: none; /* MenÃ¼ border'Ä±nÄ± kaldÄ±r */
+    }
+    
+    .navbar .dropdown-item {
+    color: rgb(0, 0, 0) !important; /* Dropdown item'ların yazı rengini siyah  yap */
+    }
+    
+    .navbar .dropdown-item:hover {
+    background-color: rgb(244, 226, 67) !important; /* Hover durumunda arka plan sarı  */
+    color: rgb(7, 14, 74) !important; /* Hover'da siyah yap */
+    }
+    
+    /* Navbar'daki butonlar arasında boşluklar eklemek*/
+    .navbar .navbar-nav .nav-link {
+    margin-right: 15px; /* Butonlar arasındaki boşluğu ayarlama */
+    }

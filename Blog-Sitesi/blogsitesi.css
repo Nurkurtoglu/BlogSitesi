@@ -1,0 +1,332 @@
+.navbar-nav .nav-link {
+    color: rgb(244, 226, 67) !important;
+}
+.navbar-brand {
+    color: white !important;
+}
+html {
+    scroll-behavior: smooth;
+}
+body {
+    padding-top: 56px;
+    background-color: black;
+}
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn-img-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 5px;
+    padding: 10px;
+}
+.btn-img-container img {
+    width: 150px;
+    height: 230px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.btn-img-container span {
+    font-size: 18px;
+    color: white;
+    margin-top: 10px;
+}
+.btn-img-container button {
+    background-color: transparent;
+    border: 2px solid rgb(0, 0, 0);
+    padding: 10px 30px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 265px;
+    width: 200px;
+}
+.btn-img-container button:hover {
+    background-color: rgb(244, 226, 67);
+    color: black;
+}
+#movieDetails {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgb(0, 0, 0);
+}
+#movieDetailsPage {
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+#movieDetailsContent {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px; /* Resim ve özet  arasındaki boşluk */
+}
+#moviePoster {
+    width: 150px;
+    height: auto;
+    border-radius: 8px;
+}
+.navbar .dropdown-toggle {
+background-color: #333 !important; 
+color: rgb(244, 226, 67) !important; 
+border: none; 
+margin-right: 0px; /* Butonlar arasında boşluk */
+}
+
+.navbar .dropdown-menu {
+background-color: #fffefe; /* Dropdown menüsünün arka planını koyu yap */
+border: none; /* MenÃ¼ border'Ä±nÄ± kaldÄ±r */
+}
+
+.navbar .dropdown-item {
+color: rgb(0, 0, 0) !important; /* Dropdown item'ların yazı rengini siyah  yap */
+}
+
+.navbar .dropdown-item:hover {
+background-color: rgb(244, 226, 67) !important; /* Hover durumunda arka plan sarı  */
+color: rgb(7, 14, 74) !important; /* Hover'da siyah yap */
+}
+
+/* Navbar'daki butonlar arasında boşluklar eklemek*/
+.navbar .navbar-nav .nav-link {
+margin-right: 15px; /* Butonlar arasındaki boşluğu ayarlama */
+}
+
+.navbar .btn-group {
+margin-right: 15px; /* Dropdown aralarına boşluk bırakma miktarı*/
+}
+
+/* Haftanın Enleri */
+.weekly-highlights {
+    margin-top: 100px; /* Üst kısmındaki mesafeyi artırmak için */
+    padding: 20px;
+    background-color: #333; /* Arka plan rengi */
+    color: white;
+    text-align: center;
+}
+
+.weekly-highlights h1 {
+    margin-bottom: 20px; /* Başlık ile içerik arasındaki mesafe */
+    font-size: 1.8em; /* Başlık boyutu */
+}
+
+.weekly-highlights .highlight-container {
+    display: flex;
+    flex-wrap: flex-start ;  /* Öğeleri birden fazla satıra sar */
+    justify-content: space-evenly; /* Öğeler arasındaki boşluğu eşit yap */
+    gap: 20px; /* Öğeler arasındaki boşluğu ayarlama */
+    width: 100%;
+}
+
+/* Butonların ve resimlerin genişliğini ve hizalamasını ayarlayalım */
+.weekly-highlights .btn-img-container button {
+    width: 200px !important;  /* Buton genişliği */
+    height: 240px !important; /* Buton yüksekliği */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ccc; /* Butonun etrafında sınır */
+    border-radius: 8px; /* Kenarları yuvarlat */
+    overflow: hidden; /* Resim dışına taşan kısmı gizle */
+    color: white;  /* Butonlardaki yazıyı beyaz yap */
+}
+
+/* Resimlerin boyutunu ayarlama */
+.weekly-highlights .btn-img-container img {
+    width: 100% !important;  /* Resmin genişliğini kapsayıcıya göre ayarla */
+    max-width: 150px !important;  /* Resmin genişliğini 150px ile sınırlama */
+    height: auto !important; /* Yüksekliği orantılı olarak ayarla */
+    object-fit: cover !important; /* Resmi kapsayıcıya uygun şekilde yerleştir */
+}
+header {
+    background-color: #090909;
+    padding: 1rem;
+}
+
+#tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 1rem;
+    gap: 10px;
+}
+
+.tag {
+    background-color: rgb(244, 226, 67);
+    color: rgb(5, 5, 5);
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.tag:hover {
+    background-color: rgb(178, 212, 120);
+}
+
+.tag.highlight {
+    background-color: rgb(93, 156, 54);
+}
+
+#content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 2rem;
+}
+
+.movie {
+    background-color: #839c36;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 200px;
+    text-align: center;
+    padding: 10px;
+    color: white;
+}
+
+.movie img {
+    width: 100%;
+    border-radius: 10px;
+}
+/* Arama Formu için Buton */
+.search-btn-container {
+    position: relative; /* Mutlak konumlandırma */
+    margin-top: 150px; /* Sayfanın üst kısmından 250px aşağıya yerleştir */
+    left: 50%;
+    text-align: center;
+    transform: translateX(-50%); /* Yatayda ortala */
+    width: 80%; /* Arama alanının genişliği */
+    max-width: 600px; /* Maksimum genişlik */
+}
+
+.search-form {
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    background-color: #333;
+    border-radius: 50px; /* Yuvarlatılmış köşeler */
+}
+
+.search-input {
+    width: 90%; /* Arama kutusunun genişliği */
+    padding: 12px;
+    border: none;
+    border-radius: 50px 0 0 50px; /* Sol köşeleri yuvarlat */
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-size: 1.2em;
+}
+
+.search-btn {
+    width: 10%; /* Butonun genişliği */
+    padding: 12px;
+    border: none;
+    border-radius: 0 50px 50px 0; /* Sağ köşeyi yuvarlat */
+    background-color: #f4e243; /* Buton rengi */
+    color: black;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover efekti */
+.search-btn:hover {
+    background-color: #d6c72e;
+    color: rgb(0, 0, 0);
+}
+.scroll-container {
+    width: 100%;
+    overflow-x: auto;
+    padding: 20px 0;
+    -webkit-overflow-scrolling: touch; /* iOS için düzgün kaydırma */
+    scrollbar-width: thin;
+}
+
+.scroll-content {
+    display: inline-flex; /* Yatay dizilim için */
+    gap: 20px; /* Kartlar arası boşluk */
+    padding: 10px 20px;
+    min-width: max-content; /* İçeriğe göre genişlik */
+}
+
+/* Scrollbar stilleri */
+.scroll-container::-webkit-scrollbar {
+    height: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+    background: #1a1a1a;
+    border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    background: #f4e243;
+    border-radius: 4px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #d6c72e;
+}
+
+/* Kart stilleri */
+.card {
+    flex: 0 0 auto;
+    width: 250px !important;
+    margin: 0 !important;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    height: 375px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-text {
+    font-size: 0.9rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 60px;
+}
+
+/* Responsive tasarım */
+@media (max-width: 768px) {
+    .card {
+        width: 200px !important;
+    }
+    
+    .card-img-top {
+        height: 300px;
+    }
+}
