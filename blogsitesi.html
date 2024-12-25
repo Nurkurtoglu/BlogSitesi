@@ -8,17 +8,14 @@
     <link rel="stylesheet" href="blogsitesi.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
-
-<!-- Üst menü kısmı  -->
 <body>
+    <!-- Üst menü kısmı -->
     <nav class="navbar navbar-expand-lg bg-dark text-white fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">TVISION<span style="color: rgb(244, 226, 67); font-weight: bold; font-size: 1.2em;">+</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-    
-<!--Dropdown Filmler  -->
 
             <div class="collapse navbar-collapse" id="navbarNav">
                 <div class="btn-group" role="group">
@@ -28,7 +25,6 @@
                         <li><a class="dropdown-item" href="#">En Çok Oy Alan</a></li>
                     </ul>
                 </div>
-<!--Dropdown Diziler  -->
 
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Diziler</button>
@@ -37,103 +33,190 @@
                         <li><a class="dropdown-item" href="#">En Çok Oy Alan</a></li>
                     </ul>
                 </div>
-                
-                
+
                 <!-- Türler Butonu -->
-                <a href="iindex.html" class="btn btn-success ms-3">Türler</a>
+                <a href="turler.html" class="btn btn-success ms-3">Türler</a>
+            </div>
+            
+            
+        </div>
+    </nav>    
 
-<!-- Arama yaparken arama türü seçme-->
-
-                <form action="movie-details.html" method="GET" class="d-flex" role="search" style="position: absolute; top: 10px; right: 350px;">
-                    <select name="searchType" class="form-select me-2 bg-dark text-white" style="width: auto;">
-                        <option value="movie">Film</option>
-                        <option value="tv">Dizi</option>
-                        <option value="person">Kişi</option>
-                    </select>
-                    <input class="form-control me-2 bg-dark text-white" 
-                           type="search" 
-                           name="query"
-                           placeholder="Ara..." 
-                           aria-label="Search">
-                    <button class="btn btn-sm" type="submit" style="background-color: rgb(188, 126, 222); color: black; border: none; padding: 2px 6px; font-size: 0.8em;">
-                        <i class="fas fa-search"></i> Ara
-                    </button>
-                </form>            </div>
-        </div>
-<!-- Üye Ol/Giriş Yap butonu -->
-<li><a href="signup.html" style="color: yellow ; position: absolute; right: 25px;">Giriş Yap/Kaydol</a></li> <!-- signup.html'e yönlendirme -->
-
-  </nav>    
-     <!-- Carousel ana sayfadaki reklamlarımız -->
-     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img src="file:///Users/bilgesubaris/Desktop/PROJE/WhatsApp%20Image%202024-11-09%20at%2012.38.51%20(1).jpeg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-          <img src="file:///Users/bilgesubaris/Desktop/PROJE/PHOTO-2024-11-09-13-16-33.jpg" class="d-block w-100" alt="...">
-        </div>
-        <div class="carousel-item">
-            <img src="file:///Users/bilgesubaris/Desktop/PROJE/Ekran%20Resmi%202024-11-08%2016.18.58.png" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="file:///Users/bilgesubaris/Desktop/PROJE/WhatsApp%20Image%202024-11-09%20at%2012.38.51.jpeg" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="file:///Users/bilgesubaris/Desktop/PROJE/WhatsApp%20Image%202024-11-08%20at%2016.23.46.jpeg" class="d-block w-100" alt="...">
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
+    <!-- Arama Formu -->
+    <form action="movie-details.html" method="GET" class="d-flex search-form">
+        <input class="form-control search-input" type="search" name="query" placeholder="Ara..." aria-label="Search">
+        <button class="btn search-btn" type="submit">
+            <i class="fas fa-search"></i>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-     
-    <!-- Bu Haftanın Enleri  -->
-    <section class = "weekly-highlights">
-      <h1 class="text-white">Bu Haftanın En Çok İzlenen Filmleri</h1>
-      <div class="highlight-container" id="weekly-content">
-     <script src = "script.js"></script>
+    </form>
 
-        
-      </section>
-      
+ 
+<!-- Tür Seçimi ve Puan Filtreleme -->
+<section class="filter-section" style="padding: 20px;">
+    <h2 class="text-white">Filmleri Tür ve Tarihe Göre Filtrele</h2>
+    <form action="filtered-results.html" method="GET" class="d-flex">
+        <div class="row">
+            <div class="col-md-6">
+                <label for="type" class="form-label text-white">Film/Dizi Seçin:</label>
+                <select name="type" class="form-select" style="width: 200px;">
+                    <option value="movie">Filmler</option>
+                    <option value="tv">Diziler</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="genre" class="form-label text-white">Tür Seçin:</label>
+                <select name="genre" class="form-select" style="width: 200px;">
+                    <option value="">Tür Seçin</option>
+                    <option value="28">Aksiyon</option>
+                    <option value="12">Macera</option>
+                    <option value="16">Animasyon</option>
+                    <option value="35">Komedi</option>
+                    <option value="18">Drama</option>
+                    <option value="27">Korku</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="start-date" class="form-label text-white">Başlangıç Tarihi:</label>
+                <input type="date" name="start-date" class="form-control" style="width: 200px;">
+            </div>
+            <div class="col-md-6">
+                <label for="end-date" class="form-label text-white">Bitiş Tarihi:</label>
+                <input type="date" name="end-date" class="form-control" style="width: 200px;">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3 ms-3">Filtrele</button>
+    </form>
+  </section>
   
-      <!-- Aksiyon Filmleri 
-      <div class="btn-img-container">
-          <button class="btn">
-              <img src="https://www.themoviedb.org/t/p/w1280/xIjGt7bSU7hgWtYwccfufiM1wWZ.jpg">
-              <span>Venom:Son Dans</span>
-          </button>
-          <button class="btn">
-              <img src="https://www.themoviedb.org/t/p/w1280/c3BuUXYjvGcKwZYKZsYjMDFQr1D.jpg" >
-              <span>Deadpool & Wolverine </span>
-          </button>
-          <button class="btn">
-            <img src="https://www.themoviedb.org/t/p/w1280/spWV1eRzlDxvai8LbxwAWR0Vst4.jpg" >
-            <span>Arcadian</span>
-        </button>
-        <button class="btn">
-            <img src="https://www.themoviedb.org/t/p/w1280/7fR3KxswtY8OHHZuOUB9td58CRX.jpg" >
-            <span>Survive</span>
-        </button>
-        <button class="btn">
-          <img src="https://www.themoviedb.org/t/p/w1280/s5YviCAQnvybud7mBjAz4SQJ95S.jpg" >
-          <span>Gladyatör II</span>
-      </button>
+
+
+
+    <!-- Filmler -->
+    <div class="container mt-5 pt-5">
+        <h1 class="text-white">Bu Haftanın Popüler Filmleri</h1>
+        <div class="row" id="movie-list">
+            <!-- Filmler Dinamik Olarak Buraya Eklenecek -->
         </div>
-     -->
-        <div style="height: 2000px;"></div>
-    
-    
-        <!-- Resimlerin altına film isimleri ekleme -->
-        <div id="movieDetails" style="padding: 20px; margin-top: 20px; background-color: #333; color: white;"></div>
-    
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="movieModalLabel">Film Detayları</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img id="movie-poster" src="" alt="Film Afişi" class="img-fluid">
+                        </div>
+                        <div class="col-md-8">
+                            <h3 id="movie-title"></h3>
+                            <p id="movie-overview"></p>
+                            <p><strong>Puan:</strong> <span id="movie-rating"></span></p>
+                            <button class="btn btn-primary" id="like-button"><i class="fas fa-thumbs-up"></i> Beğen</button>
+                        </div>
+                    </div>
+                    <hr>
+                    <h5>Yorumlar</h5>
+                    <div id="comments-section">
+                        <!-- Yorumlar Buraya Eklenecek -->
+                    </div>
+                    <div class="input-group mt-3">
+                        <input type="text" class="form-control" id="comment-input" placeholder="Yorum yazın...">
+                        <button class="btn btn-success" id="add-comment">Gönder</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Diziler -->
+<div class="container mt-5 pt-5">
+    <h1 class="text-white">Bu Haftanın Popüler Dizileri</h1>
+    <div class="row" id="tv-show-list">
+        <!-- Diziler Dinamik Olarak Buraya Eklenecek -->
+    </div>
+</div>
+
+<!-- Diziler Modal -->
+<div class="modal fade" id="tvModal" tabindex="-1" aria-labelledby="tvModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tvModalLabel">Dizi Detayları</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img id="tv-poster" src="" alt="Dizi Afişi" class="img-fluid">
+                    </div>
+                    <div class="col-md-8">
+                        <h3 id="tv-title"></h3>
+                        <p id="tv-overview"></p>
+                        <p><strong>Puan:</strong> <span id="tv-rating"></span></p>
+                        <button class="btn btn-primary" id="tv-like-button"><i class="fas fa-thumbs-up"></i> Beğen</button>
+                    </div>
+                </div>
+                <hr>
+                <h5>Yorumlar</h5>
+                <div id="tv-comments-section">
+                    <!-- Yorumlar Buraya Eklenecek -->
+                </div>
+                <div class="input-group mt-3">
+                    <input type="text" class="form-control" id="tv-comment-input" placeholder="Yorum yazın...">
+                    <button class="btn btn-success" id="tv-add-comment">Gönder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Yakında Gelecek Filmler -->
+    <div class="container mt-5 pt-5">
+        <h1 class="text-white">Yakında Gelecek Filmler</h1>
+        <div class="row" id="upcoming-movie-list">
+            <!-- Filmler Dinamik Olarak Buraya Eklenecek -->
+        </div>
+    </div>
+
+    <!-- Yakında Gelecek Diziler -->
+    <div class="container mt-5 pt-5">
+        <h1 class="text-white">Bugün Yayınlanacak Diziler</h1>
+        <div class="row" id="upcoming-tv-list">
+            <!-- Diziler Dinamik Olarak Buraya Eklenecek -->
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailsModalLabel">Detaylar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img id="details-poster" src="" alt="Afiş" class="img-fluid">
+                        </div>
+                        <div class="col-md-8">
+                            <h3 id="details-title"></h3>
+                            <p id="details-overview"></p>
+                            <p><strong>Puan:</strong> <span id="details-rating"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
 </body>
 </html>

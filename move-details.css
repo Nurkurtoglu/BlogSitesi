@@ -238,4 +238,51 @@ body {
         height: 265px;
         width: 200px;
     }
-   
+   /* Arama Formu için Buton */
+.search-btn-container {
+    position: relative; /* Mutlak konumlandırma */
+    margin-top: 150px; /* Sayfanın üst kısmından 250px aşağıya yerleştir */
+    left: 50%;
+    text-align: center;
+    transform: translateX(-50%); /* Yatayda ortala */
+    width: 80%; /* Arama alanının genişliği */
+    max-width: 600px; /* Maksimum genişlik */
+}
+
+.search-form {
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    background-color: #333;
+    border-radius: 50px; /* Yuvarlatılmış köşeler */
+}
+
+.search-input {
+    width: 90%; /* Arama kutusunun genişliği */
+    padding: 12px;
+    border: none;
+    border-radius: 50px 0 0 50px; /* Sol köşeleri yuvarlat */
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-size: 1.2em;
+}
+
+.search-btn {
+    width: 10%; /* Butonun genişliği */
+    padding: 12px;
+    border: none;
+    border-radius: 0 50px 50px 0; /* Sağ köşeyi yuvarlat */
+    background-color: #f4e243; /* Buton rengi */
+    color: black;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover efekti */
+.search-btn:hover {
+    background-color: #d6c72e;
+    color: white;
+}
