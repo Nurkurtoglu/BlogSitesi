@@ -27,7 +27,7 @@
 1. **Arama Yapın**: Üst kısımdaki arama çubuğuna film veya dizi başlığını girerek hızlıca arama yapın.
 2. **Film/Dizi Detaylarını Görüntüleyin**: Arama sonuçlarından birine tıklayarak, seçtiğiniz film veya dizi hakkında **daha fazla bilgi** edinin.
 3. **Yorum Yapın**: Sevdiğiniz film veya diziye **yorum** bırakın ve diğer kullanıcılarla paylaşın.
-
+4. **Beğeni Yapın**: Sevdiğiniz film veya diziye **beğeni** bırakın ve diğer kullanıcılarla paylaşın.
 ---
 
 ## **💾 Veritabanı Yapısı**
