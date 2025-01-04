@@ -9,6 +9,7 @@
 - **🔍 Arama Fonksiyonu**: Kullanıcılar, film ve dizi başlıklarıyla hızlıca arama yapabilir.
 - **🎬 Film/Dizi Detayları**: Kullanıcılar, seçtikleri film veya dizi hakkında detaylı bilgilere ulaşabilir. 
 - **💬 Yorumlar**: Her film veya dizi için kullanıcılar yorum yapabilir ve diğer kullanıcıların yorumlarını görebilir.
+- **❤️ Beğeniler**:  Her film veya dizi için kullanıcılar beğenebilir ve her film veya dizi için toplam beğeni sayısını görebilir.
 - **📱 Responsive Tasarım**: Web uygulaması, mobil ve masaüstü cihazlarda sorunsuz çalışır.
 
 ---
