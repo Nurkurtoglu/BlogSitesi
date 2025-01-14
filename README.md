@@ -46,6 +46,6 @@ TVision+ uygulaması, **PostgreSQL** veritabanını kullanmaktadır. Veritabanı
 TVision+, sade ve modern bir tasarımla kullanıcılara sorunsuz bir deneyim sunar. Arayüz, kullanıcı dostu olup, her cihazda **akıcı** bir deneyim sağlar. Responsive tasarımı sayesinde mobil cihazlarda da rahatlıkla kullanılabilir.
 
 ---
-## **🌐 Küresel Dağıtım Notları
+## 🌐 Küresel Dağıtım Notları
 
 TVision+ şu anda yerel ortamda sorunsuz bir şekilde çalışmaktadır ve küresel erişim için hazırlanıyor.
