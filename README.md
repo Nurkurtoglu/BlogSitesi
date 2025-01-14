@@ -19,6 +19,8 @@
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Node.js (Express)
 - **Veritabanı**: PostgreSQL
+- **Mimari**: Model-View-Controller (MVC)  
+- **Tasarım Desenleri**: Singleton, Factory Pattern
 
 ---
 
